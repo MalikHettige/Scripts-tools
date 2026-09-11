@@ -1,0 +1,1099 @@
+VDP Program Monitor — run at 2026-09-11 16:14
+============================================================
+
+--- HackerOne VDPs [NEW SINCE LAST RUN] (response_efficiency >= 80%) — fully classified via offers_bounties ---
+  Assa Abloy Americas [response efficiency: 82%]
+    https://hackerone.com/assa_abloy_americas
+  PRISM [response efficiency: 91%]
+    https://hackerone.com/prism_vdp
+  Anthropic Cyber Jailbreak [response efficiency: 100%]
+    https://hackerone.com/anthropic-cyber-jailbreak
+  Epic Games VDP [response efficiency: 80%]
+    https://hackerone.com/epicgames-vdp
+  Vanguard [response efficiency: 96%]
+    https://hackerone.com/vanguard
+  Clear Street Disclosure Program [response efficiency: 94%]
+    https://hackerone.com/clear_street_vdp
+  Discover VDP [response efficiency: 80%]
+    https://hackerone.com/discover-vdp
+  Gogo VDP [response efficiency: 99%]
+    https://hackerone.com/gogo_vdp
+  GetYourGuide VDP [response efficiency: 98%]
+    https://hackerone.com/getyourguide_vdp
+  Essity [response efficiency: 99%]
+    https://hackerone.com/essity
+  Bose (VDP) [response efficiency: 93%]
+    https://hackerone.com/bose_vdp
+  MOD Supply Chain VDP [response efficiency: 91%]
+    https://hackerone.com/mod_supply_chain_vdp
+  Taxwell VDP [response efficiency: 100%]
+    https://hackerone.com/taxwell-vdp
+  Luminor [response efficiency: 97%]
+    https://hackerone.com/luminor
+  BankUnited [response efficiency: 80%]
+    https://hackerone.com/bankunited
+  Hexagon-VDP [response efficiency: 81%]
+    https://hackerone.com/hexagon_vdp
+  Henkel [response efficiency: 100%]
+    https://hackerone.com/henkel_vdp
+  Robinhood Markets [response efficiency: 88%]
+    https://hackerone.com/robinhood_markets
+  DocuSign [response efficiency: 100%]
+    https://hackerone.com/docusign
+  Regions Financial [response efficiency: 100%]
+    https://hackerone.com/regions_financial
+  Tucows (VDP) [response efficiency: 93%]
+    https://hackerone.com/tucows_vdp
+  Hack The Box [response efficiency: 95%]
+    https://hackerone.com/hack_the_box
+  Lovable VDP [response efficiency: 83%]
+    https://hackerone.com/lovable-vdp
+  QinetiQ Response [response efficiency: 100%]
+    https://hackerone.com/qinetiq
+  Experian [response efficiency: 89%]
+    https://hackerone.com/experian
+  Baird [response efficiency: 100%]
+    https://hackerone.com/baird_vdp
+  Hotmart (VDP) [response efficiency: 88%]
+    https://hackerone.com/hotmartvdp
+  Hex [response efficiency: 94%]
+    https://hackerone.com/hex
+  Penn Entertainment [response efficiency: 92%]
+    https://hackerone.com/penn_entertainment
+  Adevinta [response efficiency: 90%]
+    https://hackerone.com/adevinta_vdp
+  Recreation.gov [response efficiency: 97%]
+    https://hackerone.com/recreation_gov_vdp
+  HPE VDP [response efficiency: 81%]
+    https://hackerone.com/hpe_vdp
+  Supabase [response efficiency: 88%]
+    https://hackerone.com/supabase
+  6sense VDP [response efficiency: 88%]
+    https://hackerone.com/6sense-vdp
+  Mintel [response efficiency: 93%]
+    https://hackerone.com/mintel
+  LPL Financial VDP [response efficiency: 86%]
+    https://hackerone.com/lpl_financial-vdp
+  TomTom [response efficiency: 92%]
+    https://hackerone.com/tomtom
+  SingleStore [response efficiency: 88%]
+    https://hackerone.com/singlestore
+  Lowe's Companies VDP [response efficiency: 82%]
+    https://hackerone.com/lowes
+  REI VDP [response efficiency: 100%]
+    https://hackerone.com/rei_vdp
+  Corebridge Financial [response efficiency: 83%]
+    https://hackerone.com/corebridge_financial
+  DailyPay VDP [response efficiency: 92%]
+    https://hackerone.com/dailypay_vdp
+  WellHive [response efficiency: 86%]
+    https://hackerone.com/wellhive
+  Aven (Response) [response efficiency: 89%]
+    https://hackerone.com/aven_response
+  Alshaya [response efficiency: 83%]
+    https://hackerone.com/alshaya
+  Truist Financial [response efficiency: 83%]
+    https://hackerone.com/truist_financial
+  Fertitta Entertainment [response efficiency: 83%]
+    https://hackerone.com/fertitta_entertainment
+  ABN AMRO Bank VDP [response efficiency: 100%]
+    https://hackerone.com/abn_amro_vdp
+  U.S. Department of State [response efficiency: 96%]
+    https://hackerone.com/us-department-of-state
+  KKR-VDP [response efficiency: 88%]
+    https://hackerone.com/kkr_vdp
+  Intuit [response efficiency: 100%]
+    https://hackerone.com/intuit_rdp
+  ABB Information Systems Ltd [response efficiency: 98%]
+    https://hackerone.com/abb
+  Abercrombie & Fitch Management Co. [response efficiency: 90%]
+    https://hackerone.com/abercrombie_fitch
+  ResMed [response efficiency: 80%]
+    https://hackerone.com/resmed
+  Canada Goose Inc. [response efficiency: 100%]
+    https://hackerone.com/canada_goose_inc
+  Render [response efficiency: 85%]
+    https://hackerone.com/render
+  Callsign [response efficiency: 100%]
+    https://hackerone.com/callsign
+  Ro [response efficiency: 100%]
+    https://hackerone.com/ro
+  Uniti [response efficiency: 100%]
+    https://hackerone.com/unitigroup
+  Fresenius [response efficiency: 80%]
+    https://hackerone.com/fresenius
+  Caterpillar [response efficiency: 100%]
+    https://hackerone.com/caterpillar
+  Alohi [response efficiency: 100%]
+    https://hackerone.com/alohi
+  Gymshark [response efficiency: 80%]
+    https://hackerone.com/gymshark
+  Moov [response efficiency: 100%]
+    https://hackerone.com/moov
+  Vodafone [response efficiency: 84%]
+    https://hackerone.com/vodafone
+  PagerDuty [response efficiency: 87%]
+    https://hackerone.com/pagerduty
+  OANDA [response efficiency: 83%]
+    https://hackerone.com/oanda
+  Tesco [response efficiency: 94%]
+    https://hackerone.com/tesco
+  Mondelēz International [response efficiency: 91%]
+    https://hackerone.com/mondelez
+  APNIC [response efficiency: 90%]
+    https://hackerone.com/apnic
+  Hy-Vee [response efficiency: 100%]
+    https://hackerone.com/hy-vee
+  Tenable [response efficiency: 94%]
+    https://hackerone.com/tenable
+  Semtech [response efficiency: 94%]
+    https://hackerone.com/semtech
+  LATAM Airlines [response efficiency: 86%]
+    https://hackerone.com/latamairlines
+  JetBlue [response efficiency: 86%]
+    https://hackerone.com/jetblue
+  Nominet [response efficiency: 100%]
+    https://hackerone.com/nominet
+  Zebra VDP [response efficiency: 84%]
+    https://hackerone.com/zebra_vdp
+  Fiserv [response efficiency: 97%]
+    https://hackerone.com/fiserv
+  UPS VDP [response efficiency: 83%]
+    https://hackerone.com/ups
+  Beiersdorf [response efficiency: 95%]
+    https://hackerone.com/beiersdorf
+  John Deere [response efficiency: 89%]
+    https://hackerone.com/john-deere
+  DIB-VDP [response efficiency: 100%]
+    https://hackerone.com/dib-vdp
+  Global Payments [response efficiency: 97%]
+    https://hackerone.com/global-payments
+  Costco [response efficiency: 100%]
+    https://hackerone.com/costco
+  Mars [response efficiency: 82%]
+    https://hackerone.com/mars
+  eMoney Advisor [response efficiency: 80%]
+    https://hackerone.com/emoney-advisor
+  CBRE [response efficiency: 84%]
+    https://hackerone.com/cbre
+  Ohio Secretary of State [response efficiency: 80%]
+    https://hackerone.com/ohiosecretaryofstate
+  AIG [response efficiency: 95%]
+    https://hackerone.com/aig
+  FINRA Response [response efficiency: 100%]
+    https://hackerone.com/finra
+  Vendasta [response efficiency: 100%]
+    https://hackerone.com/vendasta
+  Cedars-Sinai [response efficiency: 100%]
+    https://hackerone.com/cedars-sinai
+  Shutterfly VDP [response efficiency: 88%]
+    https://hackerone.com/shutterfly_vdp
+  Navient Solutions LLC [response efficiency: 100%]
+    https://hackerone.com/navient_solutions
+  TD Bank Group [response efficiency: 90%]
+    https://hackerone.com/td-bank
+  Flexport VDP [response efficiency: 90%]
+    https://hackerone.com/flexport_vdp
+  Myndr [response efficiency: 84%]
+    https://hackerone.com/myndr
+  Simple Poll [response efficiency: 100%]
+    https://hackerone.com/simple_poll
+  PUBG [response efficiency: 85%]
+    https://hackerone.com/pubg
+  Stripo Inc [response efficiency: 100%]
+    https://hackerone.com/stripo
+  lemlist [response efficiency: 94%]
+    https://hackerone.com/lemlist
+  Equifax-vdp [response efficiency: 93%]
+    https://hackerone.com/equifax
+  Worklytics [response efficiency: 100%]
+    https://hackerone.com/worklytics
+  curl [response efficiency: 100%]
+    https://hackerone.com/curl
+  Starling Bank VDP [response efficiency: 100%]
+    https://hackerone.com/starling_bank
+  Capital One [response efficiency: 89%]
+    https://hackerone.com/capital-one
+  phpBB [response efficiency: 84%]
+    https://hackerone.com/phpbb
+  IBM [response efficiency: 90%]
+    https://hackerone.com/ibm
+  Sony [response efficiency: 93%]
+    https://hackerone.com/sony
+  Autodesk [response efficiency: 97%]
+    https://hackerone.com/autodesk
+  Monero [response efficiency: 100%]
+    https://hackerone.com/monero
+  Bitwarden [response efficiency: 98%]
+    https://hackerone.com/bitwarden
+  Oportun [response efficiency: 80%]
+    https://hackerone.com/oportun_vdp
+  WakaTime [response efficiency: 100%]
+    https://hackerone.com/wakatime
+  Weblate [response efficiency: 87%]
+    https://hackerone.com/weblate
+  U.S. Dept Of Defense [response efficiency: 100%]
+    https://hackerone.com/deptofdefense
+  RubyGems [response efficiency: 82%]
+    https://hackerone.com/rubygems
+  OWOX, Inc. [response efficiency: 100%]
+    https://hackerone.com/owox
+  Revive Adserver [response efficiency: 100%]
+    https://hackerone.com/revive_adserver
+  Coursera [response efficiency: 92%]
+    https://hackerone.com/coursera
+  Invision Power Services, Inc. [response efficiency: 100%]
+    https://hackerone.com/ips
+  FormAssembly [response efficiency: 86%]
+    https://hackerone.com/formassembly
+  Informatica [response efficiency: 90%]
+    https://hackerone.com/informatica
+  Khan Academy [response efficiency: 100%]
+    https://hackerone.com/khanacademy
+  Concrete CMS [response efficiency: 84%]
+    https://hackerone.com/concretecms
+  Ruby on Rails [response efficiency: 88%]
+    https://hackerone.com/rails
+
+--- Bugcrowd listings [NEW SINCE LAST RUN] — UNVERIFIED VDP status, check manually ---
+  Cross-check against live filtered page: https://bugcrowd.com/engagements?category=vulnerability_disclosure_program
+  CoinDesk Data - Data API 
+    https://bugcrowd.com/engagements/CCData-mbb-og
+  FindOut InfoVis AB - Marketplace Bug Bounty Program
+    https://bugcrowd.com/engagements/FindOut-infovis
+  Jaanga Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/JaangaInc-mbb-market
+  Accxia Marketplace Bug Bounty 
+    https://bugcrowd.com/engagements/accxia-gmbh
+  Acorns Grow, Inc.
+    https://bugcrowd.com/engagements/acorns
+  Aelbox Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/aelbox
+  Afterpay Bug Bounty Program
+    https://bugcrowd.com/engagements/afterpay
+  AgilePulse Marketplace Bug Bounty Program
+    https://bugcrowd.com/engagements/agile-pulse
+  Agilis LT Bug Bounty
+    https://bugcrowd.com/engagements/agilislt
+  Aiven Managed Bug Bounty
+    https://bugcrowd.com/engagements/aiven-mbb-og
+  Akeles Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/akeles
+  AppLiger
+    https://bugcrowd.com/engagements/appliger
+  Appsvio Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/appsvio
+  Arlo Cash Rewards
+    https://bugcrowd.com/engagements/arlo
+  Asana
+    https://bugcrowd.com/engagements/asana
+  Atlassian
+    https://bugcrowd.com/engagements/atlassian
+  Atlassian-Built Apps
+    https://bugcrowd.com/engagements/atlassianapps
+  Aurory Managed Bug Bounty Engagement (Public)
+    https://bugcrowd.com/engagements/aurory-mbb-og2
+  Auth0 by Okta
+    https://bugcrowd.com/engagements/auth0-okta
+  AppFox
+    https://bugcrowd.com/engagements/automationconsultants
+  AXIS OS
+    https://bugcrowd.com/engagements/axis-os-public
+  Backblaze
+    https://bugcrowd.com/engagements/backblaze
+  Balsamiq for Atlassian Products
+    https://bugcrowd.com/engagements/balsamiq
+  Appliances - Barracuda Networks, Inc.
+    https://bugcrowd.com/engagements/barracuda
+  Binance
+    https://bugcrowd.com/engagements/binance
+  Bitdefender
+    https://bugcrowd.com/engagements/bitdefender
+  Bitdefender Box v2
+    https://bugcrowd.com/engagements/bitdefenderbox2
+  BitGo Managed Public Bug Bounty Engagement 
+    https://bugcrowd.com/engagements/bitgo-mbb-og-public
+  BitGo Mobile Apps Bug Bounty Engagement 
+    https://bugcrowd.com/engagements/bitgo-mobileapps-mbb-og
+  Bitpanda Ongoing Bug Bounty
+    https://bugcrowd.com/engagements/bitpanda-og-bb
+  Bitso Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/bitso-mbb-og
+  Blockchain.com Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/blockchain-dot-com
+  Block Open Source
+    https://bugcrowd.com/engagements/blockopensource
+  Blofin Crypto Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/blofin-crypto-mbb-og
+  BOJA Consulting Bug Bounty
+    https://bugcrowd.com/engagements/boja
+  Bolt Technology OÜ
+    https://bugcrowd.com/engagements/bolt-og
+  BrizoIT
+    https://bugcrowd.com/engagements/brizoit
+  Broken Build Bug Bounty
+    https://bugcrowd.com/engagements/brokenbuild
+  BrowserStack Inc. Marketplace Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/browserstack-market
+  Bugcrowd
+    https://bugcrowd.com/engagements/bugcrowd
+  Bullish.com
+    https://bugcrowd.com/engagements/bullish
+  Bullish Exchange
+    https://bugcrowd.com/engagements/bullish-exchange
+  Caelor Group
+    https://bugcrowd.com/engagements/caelor-group-market
+  Canva
+    https://bugcrowd.com/engagements/canva
+  Cappsule Sarl - Marketplace Bug Bounty Program
+    https://bugcrowd.com/engagements/cappsule-sarl
+  Majid Al Futtaim Retail
+    https://bugcrowd.com/engagements/carrefour
+  Cash App
+    https://bugcrowd.com/engagements/cashapp
+  Catapult Labs Bug Bounty
+    https://bugcrowd.com/engagements/catapultlabs
+  celix Solutions GmbH Marketplace Bug Bounty Program
+    https://bugcrowd.com/engagements/celix-solutions-market
+  Council on Foreign Relations
+    https://bugcrowd.com/engagements/cfr
+  Chime Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/chime
+  Chipotle Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/chipotle-mbb-og
+  Cisco Networking
+    https://bugcrowd.com/engagements/cisconetworking
+  City of Vienna Managed Bug Bounty
+    https://bugcrowd.com/engagements/city-of-vienna-mbb-og
+  ClassDojo
+    https://bugcrowd.com/engagements/classdojo
+  ClickHouse
+    https://bugcrowd.com/engagements/clickhouse
+  Cloudinary
+    https://bugcrowd.com/engagements/cloudinary
+  Centers for Medicare & Medicaid Services - Public Bug Bounty Program 2026
+    https://bugcrowd.com/engagements/cms-bbpublic
+  codecentric AG - Marketplace Bug Bounty Program
+    https://bugcrowd.com/engagements/codecentric
+  codeclou GmbH
+    https://bugcrowd.com/engagements/codeclou
+  codefortynine
+    https://bugcrowd.com/engagements/codefortynine
+  CodeAI
+    https://bugcrowd.com/engagements/codeorg
+  CoinDesk.com
+    https://bugcrowd.com/engagements/coindesk-mbb-og
+  CoinDesk Mobile
+    https://bugcrowd.com/engagements/coindesk-mobile-mbb-og
+  Colined
+    https://bugcrowd.com/engagements/colined
+  Comcast Xfinity Bug Bounty
+    https://bugcrowd.com/engagements/comcast-mbb
+   Comcast Xfinity Vulnerability Disclosure Program
+    https://bugcrowd.com/engagements/comcastvdp
+  Consensus by CoinDesk
+    https://bugcrowd.com/engagements/consensus-mbb-og
+  Craft Coders Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/craftcoders
+  Creativas
+    https://bugcrowd.com/engagements/creativas
+  Dell Technologies Application Bug Bounty
+    https://bugcrowd.com/engagements/dell-com
+  Dell Technologies' Products Bug Bounty Program
+    https://bugcrowd.com/engagements/dell-product
+  DevAcrobats
+    https://bugcrowd.com/engagements/devacrobats-market
+  Deviniti
+    https://bugcrowd.com/engagements/deviniti
+  DevSamurai
+    https://bugcrowd.com/engagements/devsamurai
+  Digital Rose's Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/digitalrose
+  Directly
+    https://bugcrowd.com/engagements/directly
+  Dutch Beginners ZZP Marketplace Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/dutch-beginners-market
+  Easy Agile
+    https://bugcrowd.com/engagements/easyagile
+  eazyBI
+    https://bugcrowd.com/engagements/eazybi
+  Elementor: Bug Bounty Program
+    https://bugcrowd.com/engagements/elementor
+  Elements
+    https://bugcrowd.com/engagements/elements
+  Entain Game Logic Flaws Bug Bounty Program
+    https://bugcrowd.com/engagements/entain-glf-mbb-og
+  Entain Public Managed Bug Bounty Engagement 2024
+    https://bugcrowd.com/engagements/entain-public-mbb-og
+  EPAM Systems Managed Bug Bounty Program
+    https://bugcrowd.com/engagements/epam-mbb-og
+  APTIS
+    https://bugcrowd.com/engagements/epicsumup
+  eToro Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/etoro-mbb-og
+  Etsy
+    https://bugcrowd.com/engagements/etsy
+  Felix Health Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/felix-health-mbb-og
+  55 Degrees
+    https://bugcrowd.com/engagements/fiftyfivedegrees
+  Certinia (formerly FinancialForce)
+    https://bugcrowd.com/engagements/financialforce
+  Fireblocks Web Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/fireblocks-mbb-og
+  Fireblocks MPC Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/fireblocks-mbb-og2
+  FIS
+    https://bugcrowd.com/engagements/fis
+  Fivetran
+    https://bugcrowd.com/engagements/fivetran-mbb-og
+  Flourish
+    https://bugcrowd.com/engagements/flourish
+  SecureDrop
+    https://bugcrowd.com/engagements/freedomofpress
+  Gearset: Managed Bug Bounty
+    https://bugcrowd.com/engagements/gearset-mbb
+  Glassdoor Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/glassdoor-ogbb
+  Glean Technologies Public Engagement
+    https://bugcrowd.com/engagements/glean-technologies-public
+  Gliffy
+    https://bugcrowd.com/engagements/gliffy
+  HostGator LATAM Bug Bounty
+    https://bugcrowd.com/engagements/hostgator-latam-bb
+  HotDoc
+    https://bugcrowd.com/engagements/hotdoc
+  HPE Networking Product Public Program
+    https://bugcrowd.com/engagements/hpe-networking-product-public
+  The Hut Group: Public Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/hutgroup-public
+  Hypixel Studios Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/hypixel-studios-mbb-og
+  Ibotta
+    https://bugcrowd.com/engagements/ibotta
+  iFood: Bug Bounty Program
+    https://bugcrowd.com/engagements/ifood-og
+  Immutable Bug Bounty
+    https://bugcrowd.com/engagements/immutable
+  Imperva - Thales Bug Bounty
+    https://bugcrowd.com/engagements/imperva-mbb
+  Indeed
+    https://bugcrowd.com/engagements/indeed
+  Inprowiser Bug Bounty
+    https://bugcrowd.com/engagements/inprowiser
+  Intercom
+    https://bugcrowd.com/engagements/intercom
+  Internet Brands Public
+    https://bugcrowd.com/engagements/internetbrands-public
+  iRobot
+    https://bugcrowd.com/engagements/irobot
+  Izymes
+    https://bugcrowd.com/engagements/izymes
+  J-Tricks - Marketplace Bug Bounty Program
+    https://bugcrowd.com/engagements/j-tricks
+  Jora
+    https://bugcrowd.com/engagements/jora
+  Just Eat Takeaway.com
+    https://bugcrowd.com/engagements/justeattakeaway
+  K15t
+    https://bugcrowd.com/engagements/k15t
+  Kaleido
+    https://bugcrowd.com/engagements/kaleido
+  Kantega SSO
+    https://bugcrowd.com/engagements/kantega
+  Keeper Security Public Bounty Program
+    https://bugcrowd.com/engagements/keepersecurity
+  Kiteworks
+    https://bugcrowd.com/engagements/kiteworks-public
+  Klaviyo Managed Bug Bounty
+    https://bugcrowd.com/engagements/klaviyo-og
+  Kohl's
+    https://bugcrowd.com/engagements/kohls
+  KuCoin Managed Bug Bounty Program
+    https://bugcrowd.com/engagements/kucoin
+  LastPass
+    https://bugcrowd.com/engagements/lastpass
+  Latitude Financial Services Bug Bounty 
+    https://bugcrowd.com/engagements/latitude-financial-service-bugbounty
+  LaunchDarkly Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/launchdarkly-mbb-og
+  Electroneum Legacy Blockchain: EOL
+    https://bugcrowd.com/engagements/legacy-blockchain-mbb-og
+  Lightspeed Hospitality
+    https://bugcrowd.com/engagements/lightspeed-hospitality
+  Lightspeed Retail
+    https://bugcrowd.com/engagements/lightspeed-retail
+  Lime
+    https://bugcrowd.com/engagements/lime
+  Linktree
+    https://bugcrowd.com/engagements/linktree-mbb-og
+  Litew8 GmbH - Marketplace Bug Bounty 
+    https://bugcrowd.com/engagements/litew8
+  lululemon
+    https://bugcrowd.com/engagements/lululemon
+  Luno Bug Bounty Program
+    https://bugcrowd.com/engagements/luno-og
+  Majid Al Futtaim Lifestyle
+    https://bugcrowd.com/engagements/maffashion
+  Magic Apps Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/magic-apps
+  Magic Labs Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/magiclabs-mbb-og
+  Majid Al Futtaim Customer Solutions
+    https://bugcrowd.com/engagements/majidalfuttaim-loyalty
+  Majid Al Futtaim Properties
+    https://bugcrowd.com/engagements/mallofemirates
+  Marketplace Expert SL
+    https://bugcrowd.com/engagements/marketplaceexpert
+  Marvelution
+    https://bugcrowd.com/engagements/marvelutionbv
+  Mastercard Public Bug Bounty 
+    https://bugcrowd.com/engagements/mastercard
+  MATLAB Online - Ongoing Bug Bounty Engagement
+    https://bugcrowd.com/engagements/matlab-online
+  Mattermost Public Bug Bounty Engagement 
+    https://bugcrowd.com/engagements/mattermost-mbb-public
+  META-INF
+    https://bugcrowd.com/engagements/metainfkft
+  MGM China Holdings Limited Managed Bug Bounty Program
+    https://bugcrowd.com/engagements/mgmmacau-mbb-og
+  MobilityStream Bug Bounty
+    https://bugcrowd.com/engagements/mobilitystream
+  Monash University Bug Bounty
+    https://bugcrowd.com/engagements/monash-mbb
+  Moneytree KK
+    https://bugcrowd.com/engagements/moneytreekkog
+  Moovit Managed Bug Bounty Program
+    https://bugcrowd.com/engagements/moovit-mbb-og
+  Motorola Mobility Hardware Engagement
+    https://bugcrowd.com/engagements/motorolamobility-iot
+  Move Work Forward
+    https://bugcrowd.com/engagements/moveworkforward
+  MyFitnessPal Managed Bug Bounty
+    https://bugcrowd.com/engagements/myfitnesspal-mbb
+  Navan
+    https://bugcrowd.com/engagements/navan
+  Navarambh
+    https://bugcrowd.com/engagements/navarambh
+  Nemetschek
+    https://bugcrowd.com/engagements/nemetschek
+  NEOGOV Public Assets
+    https://bugcrowd.com/engagements/neohrms
+  New Relic Public Bug Bounty Program
+    https://bugcrowd.com/engagements/newrelic-mbb-og-public
+  Nextup.ai
+    https://bugcrowd.com/engagements/nextupai
+  Northwestern Mutual - Public Bug Bounty
+    https://bugcrowd.com/engagements/northwestern-mutual-mbb-og
+  Nubank Brasil Managed Bug Bounty Program
+    https://bugcrowd.com/engagements/nubank
+  Octopus Deploy
+    https://bugcrowd.com/engagements/octopus-deploy
+  Octopus
+    https://bugcrowd.com/engagements/octopus-og
+  oDesk 
+    https://bugcrowd.com/engagements/odesk
+  Okapya
+    https://bugcrowd.com/engagements/okapya
+  Okta
+    https://bugcrowd.com/engagements/okta
+  OneTrust
+    https://bugcrowd.com/engagements/onetrust
+  Onward Software Solutions Inc. - Marketplace Bug Bounty Program
+    https://bugcrowd.com/engagements/onward-software-solutions-inc
+  OpenAI
+    https://bugcrowd.com/engagements/openai
+  Safety Bug Bounty
+    https://bugcrowd.com/engagements/openai-safety
+  OpenSea Managed Bug Bounty Program
+    https://bugcrowd.com/engagements/opensea
+  Opera Public Bug Bounty
+    https://bugcrowd.com/engagements/opera
+  Opsgenie
+    https://bugcrowd.com/engagements/opsgenie
+  Optimizely
+    https://bugcrowd.com/engagements/optimizely
+  Optus Managed Bug Bounty
+    https://bugcrowd.com/engagements/optus-mbb-og
+  Opus Guard Marketplace Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/opus-guard-market
+  Orderly Network: Bug Bounty Program
+    https://bugcrowd.com/engagements/orderlynetwork-mbb-og
+  Orderly Network Public Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/orderlynetwork-mbb-og2
+  Origin Energy
+    https://bugcrowd.com/engagements/originenergy-og1
+  OSL Managed Public Bug Bounty Engagement 
+    https://bugcrowd.com/engagements/osl-mbb-og1
+  OST Consulting SRL Marketplace Managed Bug Bounty Engagement 
+    https://bugcrowd.com/engagements/ost-consulting-market
+  Pantheon
+    https://bugcrowd.com/engagements/pantheon
+  Empower Personal Wealth
+    https://bugcrowd.com/engagements/personalcapital
+  Pexels
+    https://bugcrowd.com/engagements/pexels
+  Pinterest
+    https://bugcrowd.com/engagements/pinterest
+  Pixabay
+    https://bugcrowd.com/engagements/pixabay
+  PlanetHoster Bug Bounty 
+    https://bugcrowd.com/engagements/planethosterinc
+  The Plugin People
+    https://bugcrowd.com/engagements/plugin-people
+  Plusgrade Loyalty Public Program
+    https://bugcrowd.com/engagements/plusgrade-mbb-public
+  PNI Media - Bug Bounty
+    https://bugcrowd.com/engagements/pnimedia-bb
+  Programmer Hat Marketplace Bug Bounty Program
+    https://bugcrowd.com/engagements/programmer-hat-market
+  ProjectBalm
+    https://bugcrowd.com/engagements/projectbalm
+  Prosus
+    https://bugcrowd.com/engagements/prosus-og
+  QuintoAndar Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/quintoandar
+  Quirk Consulting Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/quirk-consulting
+  Quizlet
+    https://bugcrowd.com/engagements/quizlet
+  RadBee Ltd.
+    https://bugcrowd.com/engagements/radbee
+  Railsware
+    https://bugcrowd.com/engagements/railsware
+  Raley Apps
+    https://bugcrowd.com/engagements/raleyapps
+  Rapyd
+    https://bugcrowd.com/engagements/rapyd
+  REA Group | realestate.com.au, realcommercial.com.au, property.com.au
+    https://bugcrowd.com/engagements/rea-mbb-og
+  Recorded Future Public Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/recorded-future-mbb-og
+  Rec Room Video Games
+    https://bugcrowd.com/engagements/recroom-og
+  Redmoon
+    https://bugcrowd.com/engagements/redmoon
+  Refined
+    https://bugcrowd.com/engagements/refined2
+  Release Management (by Y2 ENGR)
+    https://bugcrowd.com/engagements/releasemanagement
+  Requirement Yogi (Bug bounty)
+    https://bugcrowd.com/engagements/requirement-yogi
+  Resolution
+    https://bugcrowd.com/engagements/resolutionde
+  RV Softwares Marketplace Bug Bounty Program
+    https://bugcrowd.com/engagements/rv-softwares
+  SaaSJet
+    https://bugcrowd.com/engagements/saasjet
+  SAP Invitational Bug Bounty Program
+    https://bugcrowd.com/engagements/sap-private-invite
+  Savignano Software Solutions Marketplace Bug Bounty Program
+    https://bugcrowd.com/engagements/savignano
+  SecureFlag Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/secureflag-mbb-market
+  SEEK 
+    https://bugcrowd.com/engagements/seek
+  Seek.com
+    https://bugcrowd.com/engagements/seek-com
+  Shinetech Software Inc Marketplace Managed Bug Bounty Engagement 
+    https://bugcrowd.com/engagements/shinetech-software-market
+  Shipwire
+    https://bugcrowd.com/engagements/shipwire
+  SimpliSafe Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/simplisafe
+  Skroutz Public Managed Bug Bounty
+    https://bugcrowd.com/engagements/skroutz
+  Sky UK/ROI Vulnerability Disclosure Program
+    https://bugcrowd.com/engagements/sky-plc-mbb-og
+  Sky Italy Vulnerability Disclosure Program
+    https://bugcrowd.com/engagements/sky-plc-mbb-og1
+  Sky DACH Vulnerability Disclosure Program
+    https://bugcrowd.com/engagements/sky-plc-mbb-og2
+  Skyscanner
+    https://bugcrowd.com/engagements/skyscanner
+  Electroneum Smart Chain (ETN-SC) — EVM-Compatible Blockchain
+    https://bugcrowd.com/engagements/smartchain-mbb-og
+  SnapNames Bug Bounty
+    https://bugcrowd.com/engagements/snapnames
+  SolDevelo
+    https://bugcrowd.com/engagements/soldevelo
+  Sophos
+    https://bugcrowd.com/engagements/sophos
+  Soteri Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/soteri
+  SoundCloud
+    https://bugcrowd.com/engagements/soundcloud
+  SpaceX/Starlink
+    https://bugcrowd.com/engagements/spacex
+  Square
+    https://bugcrowd.com/engagements/square
+  STAGIL Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/stagil
+  Statuspage
+    https://bugcrowd.com/engagements/statuspage
+  Stiltsoft
+    https://bugcrowd.com/engagements/stiltsoft
+  StonikByte
+    https://bugcrowd.com/engagements/stonikbyte
+  Sykora IT Marketplace Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/sykora-it-market
+  T-Mobile
+    https://bugcrowd.com/engagements/t-mobile
+  Tamedia
+    https://bugcrowd.com/engagements/tamedia
+  Infinite Athlete
+    https://bugcrowd.com/engagements/tempusex-public-mbb-og
+  Tesla
+    https://bugcrowd.com/engagements/tesla
+  TheFork Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/thefork-mbb-og
+  The Trade Desk
+    https://bugcrowd.com/engagements/thetradedesk-mbb
+  Cisco ThousandEyes Vulnerability Hunting aka Bug Bounty 
+    https://bugcrowd.com/engagements/thousandeyes-og
+  TIDAL
+    https://bugcrowd.com/engagements/tidal-bugbounty
+  ToolsPlus
+    https://bugcrowd.com/engagements/toolsplus
+  Trello
+    https://bugcrowd.com/engagements/trello
+  Tripadvisor 
+    https://bugcrowd.com/engagements/tripadvisor-bb-og
+  TRM Labs Public Bug Bounty Engagement
+    https://bugcrowd.com/engagements/trm-labs-public-mbb
+  20 Minuten
+    https://bugcrowd.com/engagements/twentyminuten
+  Tyler Technologies Data & Insights – Tyler Data Platform, powered by Socrata
+    https://bugcrowd.com/engagements/tyler-tech-data-insights
+  Ultra Mobile Public ECOMM 2025 Bug Bounty Engagement
+    https://bugcrowd.com/engagements/ultramobile-ecomm
+  Ultra Mobile Mobile Apps Bug Bounty Engagement
+    https://bugcrowd.com/engagements/ultramobile-mobile-apps
+  Ultra Mobile Public Bug Bounty Engagement
+    https://bugcrowd.com/engagements/ultramobile-public
+  Ultra Mobile Retailer Portal Bug Bounty Engagement
+    https://bugcrowd.com/engagements/ultramobile-retailer-portal
+  Under Armour Product Security
+    https://bugcrowd.com/engagements/underarmour
+  Under Armour Corporate
+    https://bugcrowd.com/engagements/underarmour-corp
+  Unity Technologies
+    https://bugcrowd.com/engagements/unity
+  Upwork
+    https://bugcrowd.com/engagements/upwork
+  USAA
+    https://bugcrowd.com/engagements/usaa
+  Vectors Bug Bounty 
+    https://bugcrowd.com/engagements/vectors-marketplace
+  Verisign Bug Bounty
+    https://bugcrowd.com/engagements/verisign
+  Viator
+    https://bugcrowd.com/engagements/viator
+  Volkswagen 
+    https://bugcrowd.com/engagements/volkswagen-og
+  New Blue Website (NBW) - VWFS Bug Bounty Program
+    https://bugcrowd.com/engagements/volkswagen-vwfs-mbb-og
+  Majid Al Futtaim Entertainment
+    https://bugcrowd.com/engagements/vox
+  weweave GmbH Marketplace Bug Bounty
+    https://bugcrowd.com/engagements/we-weave
+  Web.com Bug Bounty
+    https://bugcrowd.com/engagements/webdotcom
+  Wise (ex-TransferWise)
+    https://bugcrowd.com/engagements/wise
+  Wyze Bug Bounty
+    https://bugcrowd.com/engagements/wyze
+  Xfinity Home & xFi
+    https://bugcrowd.com/engagements/xfinity-home
+  Xopero Software S.A. Marketplace Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/xopero-software-marketplace
+  YNAB
+    https://bugcrowd.com/engagements/ynab
+  Zendesk Managed Bug Bounty Engagement
+    https://bugcrowd.com/engagements/zendesk
+  Zola Managed Bug Bounty 
+    https://bugcrowd.com/engagements/zola-mbb-og
+
+--- Intigriti listings [NEW SINCE LAST RUN] — UNVERIFIED VDP status, check manually ---
+  Cross-check against live filtered page: https://app.intigriti.com/researcher/programs
+  Adobe Public
+    https://www.intigriti.com/programs/adobe/adobepublic/detail
+  Aikido Security: Bug Bounty Program
+    https://www.intigriti.com/programs/aikido/aikido/detail
+  Algemeen Dagblad
+    https://www.intigriti.com/programs/dpgm/algemeendagblad/detail
+  Allegro
+    https://www.intigriti.com/programs/allegro/allegrobugbounty/detail
+  Altera
+    https://www.intigriti.com/programs/altera/altera/detail
+  Anaconda Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/anacondainc/anacondavdp/detail
+  Arbonia VDP program
+    https://www.intigriti.com/programs/arbonia/arboniavdpprogram/detail
+  Arm
+    https://www.intigriti.com/programs/arm/arm/detail
+  Atolls Vulnerability Disclosure Program (VDP)
+    https://www.intigriti.com/programs/atolls/atollsvdp/detail
+  Attentia VDP
+    https://www.intigriti.com/programs/attentia/attentiavdp/detail
+  Axel Springer National Media & Tech
+    https://www.intigriti.com/programs/axelspringerse/nmt/detail
+  Axel Springer SE Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/axelspringerse/axelspringersevulnerabilitydisclosureprogram/detail
+  BMC
+    https://www.intigriti.com/programs/randstad/bmc/detail
+  BMW Group
+    https://www.intigriti.com/programs/bmw/bmwgroup/detail
+  BMW Group Automotive
+    https://www.intigriti.com/programs/bmw/bmwgroup-automotive/detail
+  Bitvavo VDP
+    https://www.intigriti.com/programs/bitvavo/bitvavovdp/detail
+  Bpost
+    https://www.intigriti.com/programs/bpost/dummy/detail
+  Bühler Group VDP
+    https://www.intigriti.com/programs/buhlergroup/buhlergroupvdp/detail
+  CM.com
+    https://www.intigriti.com/programs/cmcom/cmcom/detail
+  Canada Post - Responsible Disclosure Program
+    https://www.intigriti.com/programs/innovapost/innovapost/detail
+  Capital.com
+    https://www.intigriti.com/programs/capitalcom/capitalcom/detail
+  Citymesh Responsible Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/citymesh/responsiblevulnerabilitydisclosureprogram/detail
+  Cloudways by DigitalOcean
+    https://www.intigriti.com/programs/digitalocean/cloudways/detail
+  Cross Border Fines
+    https://www.intigriti.com/programs/bpost/crossborderfines/detail
+  Cyber Security Coalition
+    https://www.intigriti.com/programs/cybersecuritycoalition/cybersecuritycoalition/detail
+  DHL Group Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/dhlgroup/dhlvdp/detail
+  DIGI Responsible Disclosure Program
+    https://www.intigriti.com/programs/digi/digi-vdp/detail
+  DPG Media
+    https://www.intigriti.com/programs/dpgm/dpgmedia/detail
+  Dashlane Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/dashlane/dashlanevulnerabilitydisclosureprogram/detail
+  De Morgen
+    https://www.intigriti.com/programs/dpgm/demorgen/detail
+  De Volkskrant
+    https://www.intigriti.com/programs/dpgm/devolkskrant/detail
+  Delen Private Bank
+    https://www.intigriti.com/programs/delenprivatebank/privatebankdelen/detail
+  DigitalOcean
+    https://www.intigriti.com/programs/digitalocean/digitalocean/detail
+  Donorbox VDP
+    https://www.intigriti.com/programs/donorbox/donorboxvdp/detail
+  Driessen Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/driessengroep/driessenvdp/detail
+  Dropbox Bug Bounty
+    https://www.intigriti.com/programs/dropbox/dropbox/detail
+  Dropbox Vulnerability Disclosure Program 
+    https://www.intigriti.com/programs/dropbox/dropbox-vdp/detail
+  Dstny
+    https://www.intigriti.com/programs/dstny/dstnybugbounty/detail
+  Dutch Lottery VDP
+    https://www.intigriti.com/programs/nederlandseloterij/dutchlotteryvdp/detail
+  EURid
+    https://www.intigriti.com/programs/eurid/eurid/detail
+  European Space Agency (ESA) VDP
+    https://www.intigriti.com/programs/europeanspaceagency/europeanspaceagencyvdp/detail
+  Exact Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/exact/exactvulnerabilitydisclosureprogram/detail
+  Exoscale Bug Bounty
+    https://www.intigriti.com/programs/exoscale/excoscalebugbounty/detail
+  Fing Bug Bounty Program
+    https://www.intigriti.com/programs/lansweeper/fing/detail
+  Grafana Labs - Vulnerability Disclosure Program (VDP)
+    https://www.intigriti.com/programs/grafanalabs/grafanalabsvdp/detail
+  HRS Group VDP
+    https://www.intigriti.com/programs/hrsgroup/hrsgroupvdp/detail
+  Here Technologies
+    https://www.intigriti.com/programs/heretechnologies/heretechnologies/detail
+  Het Laatste Nieuws
+    https://www.intigriti.com/programs/dpgm/hetlaatstenieuws/detail
+  Het Parool
+    https://www.intigriti.com/programs/dpgm/hetparool/detail
+  House of HR Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/houseofhr/houseofhrvulnerabilitydisclosureprogram/detail
+  Housing Application (huisvestingsapp) Bug Bounty Program
+    https://www.intigriti.com/programs/kuleuven/huisvesting/detail
+  Humo
+    https://www.intigriti.com/programs/dpgm/humo/detail
+  ICI PARIS XL
+    https://www.intigriti.com/programs/aswatson/iciparisxl/detail
+  ING Responsible Disclosure
+    https://www.intigriti.com/programs/ing/ing-responsible-disclosure/detail
+  InnoGames
+    https://www.intigriti.com/programs/innogames/innogames/detail
+  Intel®
+    https://www.intigriti.com/programs/intel/intel/detail
+  Intergamma
+    https://www.intigriti.com/programs/intergamma/intergamma/detail
+  Ivo: AI VDP
+    https://www.intigriti.com/programs/ivoai/ivovulnerabilitydisclosureprogram/detail
+  KU Leuven Vulnerability Disclosure Program (VDP)
+    https://www.intigriti.com/programs/kuleuven/kuleuvenrdp/detail
+  Kiwa Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/kiwa/kiwavdp/detail
+  Kruidvat
+    https://www.intigriti.com/programs/aswatson/kruidvat/detail
+  Lansweeper Bug Bounty Program
+    https://www.intigriti.com/programs/lansweeper/lansweeper1/detail
+  Libelle
+    https://www.intigriti.com/programs/dpgm/libelle/detail
+  Liferay VDP
+    https://www.intigriti.com/programs/liferay/liferay-vdp/detail
+  MAGNIFIC VDP
+    https://www.intigriti.com/programs/freepik/freepikcompany/detail
+  Marionnaud
+    https://www.intigriti.com/programs/aswatson/marionnaud/detail
+  Mobile Vikings
+    https://www.intigriti.com/programs/mv/mobilevikings/detail
+  Monzo Public Bug Bounty Program
+    https://www.intigriti.com/programs/monzobank/monzopublicbugbountyprogram/detail
+  Moralis VDP
+    https://www.intigriti.com/programs/moralis/moralisio/detail
+  NVIDIA Public Bug Bounty
+    https://www.intigriti.com/programs/nvidia/nvidiapublicbugbounty/detail
+  NVIDIA Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/nvidia/nvidiavdp/detail
+  Nestlé VDP
+    https://www.intigriti.com/programs/nestl%C3%A9/nestl%C3%A9vdp/detail
+  Nexo
+    https://www.intigriti.com/programs/nexo/nexo/detail
+  Nexuzhealth
+    https://www.intigriti.com/programs/nexuzhealth/nexuzhealth/detail
+  Nexuzhealth VDP
+    https://www.intigriti.com/programs/nexuzhealth/nexuzhealthvdp/detail
+  Nexuzhealth Web PACS
+    https://www.intigriti.com/programs/uz%20leuven/nexuzhealthwebpacs/detail
+  OURA Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/ourahealthoy/ouravulnerabilitydisclosureprogram/detail
+  Online enrollment for students Bug Bounty Program
+    https://www.intigriti.com/programs/kuleuven/onlineinschrijvingenbetalingstoepassing/detail
+  Orbia Responsible Disclosure
+    https://www.intigriti.com/programs/orbia/orbiavdp/detail
+  PeopleCert VDP
+    https://www.intigriti.com/programs/peoplecert/peoplecert/detail
+  Personio
+    https://www.intigriti.com/programs/personio/personio/detail
+  Port of Antwerp-Bruges
+    https://www.intigriti.com/programs/portofantwerp/portofantwerp/detail
+  Posti Bug Bounty 
+    https://www.intigriti.com/programs/posti/postibugbounty/detail
+  Proof.com VDP
+    https://www.intigriti.com/programs/proof/proofvdp/detail
+  QC VDP
+    https://www.intigriti.com/programs/quadcode/qcvdp/detail
+  Qualified Responsible Disclosure Program
+    https://www.intigriti.com/programs/qualified/qualifiedresponsibledisclosureprogram/detail
+  RGF BE - VDP
+    https://www.intigriti.com/programs/rgfstaffing/rgfbe-vdp/detail
+  RIPE NCC
+    https://www.intigriti.com/programs/ripencc/ripencc/detail
+  Randstad
+    https://www.intigriti.com/programs/randstad/randstad/detail
+  Red Bull
+    https://www.intigriti.com/programs/redbull/redbull/detail
+  Revolut VDP
+    https://www.intigriti.com/programs/revolut/revolutvdp/detail
+  Rivian Bug Bounty
+    https://www.intigriti.com/programs/rivian/rivianbugbounty/detail
+  SBB - Swiss Federal Railways
+    https://www.intigriti.com/programs/sbb/sbbglobal/detail
+  Salto Vulnerability Disclosure 
+    https://www.intigriti.com/programs/saltosystems/saltovulnerabilitydisclosure/detail
+  Signicat Responsible Disclosure
+    https://www.intigriti.com/programs/signicat/signicatresponsibledisclosure/detail
+  SimScale
+    https://www.intigriti.com/programs/simscale/simscale/detail
+  Social Deal
+    https://www.intigriti.com/programs/socialdeal/socialdeal/detail
+  SolarWinds VDP
+    https://www.intigriti.com/programs/solarwinds/solarwindsvdp/detail
+  Spacelift VDP
+    https://www.intigriti.com/programs/spacelift/spaceliftvdp/detail
+  Speakap Responsible Disclosure
+    https://www.intigriti.com/programs/speakap/speakapresponsibledisclosure/detail
+  Storebrand Responsible Disclosure
+    https://www.intigriti.com/programs/spp-storebrand/storebrand-rd/detail
+  Superdrug
+    https://www.intigriti.com/programs/aswatson/superdrug/detail
+  Tekion VDP
+    https://www.intigriti.com/programs/tekion/tekionvdp/detail
+  Tempo-Team 
+    https://www.intigriti.com/programs/randstad/tempo-team/detail
+  The Coca-Cola Company Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/tccc/coca-cola/detail
+  The Perfume Shop
+    https://www.intigriti.com/programs/aswatson/theperfumeshop/detail
+  Toast VDP
+    https://www.intigriti.com/programs/toast/toastvdp/detail
+  Tomorrowland
+    https://www.intigriti.com/programs/tomorrowland/tomorrowland/detail
+  Torfs
+    https://www.intigriti.com/programs/torfs/torfs/detail
+  Trouw
+    https://www.intigriti.com/programs/dpgm/trouw/detail
+  TrueLayer VDP
+    https://www.intigriti.com/programs/truelayer/truelayervdp/detail
+  Trusted Firmware
+    https://www.intigriti.com/programs/arm/trustedfirmware/detail
+  Tweakers
+    https://www.intigriti.com/programs/dpgm/tweakers/detail
+  UZ Leuven
+    https://www.intigriti.com/programs/uz%20leuven/uzleuven/detail
+  Ubisoft Responsible Disclosure Program
+    https://www.intigriti.com/programs/ubisoft/ubisoftvdp/detail
+  University of Basel VDP
+    https://www.intigriti.com/programs/universityofbasel/universityofbaselvdp/detail
+  Universitätsspital Zürich VDP
+    https://www.intigriti.com/programs/universitatsspitalzurich/usz-vdp/detail
+  Uphold
+    https://www.intigriti.com/programs/Uphold/upholdcom/detail
+  VDP
+    https://www.intigriti.com/programs/showpad/vdp/detail
+  VRT
+    https://www.intigriti.com/programs/vrtnv/vrtnv/detail
+  VTM GO
+    https://www.intigriti.com/programs/dpgm/vtmgo/detail
+  Visma Responsible Disclosure
+    https://www.intigriti.com/programs/visma/VismaResponsibleDisclosure/detail
+  Vlerick Business School
+    https://www.intigriti.com/programs/vlerickbusinessschool/vlerickbusinessschool/detail
+  Voi Scooters
+    https://www.intigriti.com/programs/voi/voiscooters/detail
+  Voi Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/voi/voivulnerabilitydisclosureprogram/detail
+  WP Engine Bug Bounty
+    https://www.intigriti.com/programs/wpengine/wpenginebugbounty/detail
+  WP Engine VDP
+    https://www.intigriti.com/programs/wpengine/wpengine/detail
+  Water-Link
+    https://www.intigriti.com/programs/waterlink/water-link/detail
+  Water-Link VDP
+    https://www.intigriti.com/programs/waterlink/water-linkvdp/detail
+  Watsons
+    https://www.intigriti.com/programs/aswatson/watsons/detail
+  Wärtsilä Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/wartsila/wartsila-vdp/detail
+  Yacht
+    https://www.intigriti.com/programs/randstad/yacht/detail
+  Yahoo Bug Bounty
+    https://www.intigriti.com/programs/yahoo/yahoobugbounty/detail
+  Zabka Group Vulnerability Disclosure Program
+    https://www.intigriti.com/programs/zabkapolska/zabkagroup-vdp/detail
+  e-tracker
+    https://www.intigriti.com/programs/bpost/e-tracker/detail
+  eHealth Hub VZN KUL
+    https://www.intigriti.com/programs/uz%20leuven/ehealthhub%26meta-hubvznkul/detail
+  intigriti
+    https://www.intigriti.com/programs/intigriti/intigriti/detail
+
+--- Known limitations (not fabricated, deliberately omitted) ---
+  Resolved-report count, scope breadth, and general competition level
+  are NOT available from this dataset for any platform. Response
+  efficiency IS available for HackerOne only (response_efficiency_percentage,
+  confirmed live). Bugcrowd/Intigriti VDP-vs-Paid status cannot be
+  auto-classified — always check each program's own page before testing.
