@@ -1,34 +1,16 @@
 #!/usr/bin/env python3
 """
-vdp_finder.py
+vdp_finder.py — Finds newly-listed VDP (non-paying) bug bounty programs
+across HackerOne, Bugcrowd, and Intigriti.
 
-Pulls program listings for HackerOne, Bugcrowd, and Intigriti from the
-community-maintained "bounty-targets-data" project (hourly-updated,
-3.9k+ stars, actively maintained as of this writing):
-https://github.com/arkadiyt/bounty-targets-data
-
-Features:
-  - Skips weekends by default (use --force to run anyway)
-  - Only shows programs not seen in a previous run (tracked in seen_cache.json)
-  - Optional keyword filter (e.g. "api") to match your own hunting focus
-
-Known limitations (being upfront rather than guessing):
-  - Intigriti's raw data doesn't reliably expose a Paid/VDP flag in this
-    dataset, so Intigriti entries are labeled "Program" (unclassified)
-    rather than a guessed label that could be wrong.
-  - Response efficiency (HackerOne) is NOT in this dataset - that metric
-    lives in HackerOne's own directory UI, which doesn't have a stable
-    public API. Not faked here; flagged as a manual check if you need it.
+Data source: https://github.com/arkadiyt/bounty-targets-data
+(community-maintained, refreshed every 30 min)
 
 Usage:
-    python vdp_finder.py
+    python vdp_finder.py --keyword api --save results.txt
     python vdp_finder.py --save results.txt
-    python vdp_finder.py --keyword api
-    python vdp_finder.py --force          (run even on a weekend)
-    python vdp_finder.py --reset-cache    (show everything again, ignore history)
-
-Requires:
-    pip install requests --break-system-packages
+    python vdp_finder.py --force
+    python vdp_finder.py --reset-cache --save results.txt
 """
 
 import argparse
@@ -36,165 +18,184 @@ import json
 import sys
 from datetime import datetime
 from pathlib import Path
+from urllib.request import urlopen, Request
+from urllib.error import URLError
 
-try:
-    import requests
-except ImportError:
-    print("Missing dependency. Install with:")
-    print("  pip install requests --break-system-packages")
-    sys.exit(1)
+SCRIPT_DIR = Path(__file__).resolve().parent
+CACHE_FILE = SCRIPT_DIR / "seen_cache.json"
 
+HACKERONE_URL = "https://raw.githubusercontent.com/arkadiyt/bounty-targets-data/main/data/hackerone_data.json"
+BUGCROWD_URL = "https://raw.githubusercontent.com/arkadiyt/bounty-targets-data/main/data/bugcrowd_data.json"
 
-BASE = "https://raw.githubusercontent.com/arkadiyt/bounty-targets-data/main/data"
-SOURCES = {
-    "HackerOne": f"{BASE}/hackerone_data.json",
-    "Bugcrowd": f"{BASE}/bugcrowd_data.json",
-    "Intigriti": f"{BASE}/intigriti_data.json",
-}
-CACHE_FILE = Path(__file__).parent / "seen_cache.json"
+BUGCROWD_LIVE_PAGE = "https://bugcrowd.com/engagements?category=vulnerability_disclosure_program"
+INTIGRITI_LIVE_PAGE = "https://app.intigriti.com/researcher/programs"
 
 
-def fetch_json(url):
-    resp = requests.get(url, timeout=20)
-    resp.raise_for_status()
-    return resp.json()
+def fetch_json(url: str):
+    """Fetch and parse JSON from a URL. Returns None on failure (does not crash)."""
+    try:
+        req = Request(url, headers={"User-Agent": "vdp_finder/1.0"})
+        with urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except (URLError, json.JSONDecodeError, TimeoutError) as e:
+        print(f"  [!] Failed to fetch {url}: {e}")
+        return None
 
 
-def parse_hackerone(data):
-    out = []
-    for entry in data:
-        handle = entry.get("handle")
-        if not handle:
-            continue
-        offers_bounties = entry.get("offers_bounties")
-        program_type = "VDP" if offers_bounties is False else (
-            "Paid" if offers_bounties is True else "Unknown"
-        )
-        out.append({
-            "name": entry.get("name", handle),
-            "url": f"https://hackerone.com/{handle}",
-            "type": program_type,
-        })
-    return out
+def load_cache() -> dict:
+    if not CACHE_FILE.exists():
+        return {"hackerone": [], "bugcrowd": []}
+    try:
+        with open(CACHE_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return {"hackerone": [], "bugcrowd": []}
 
 
-def parse_bugcrowd(data):
-    out = []
-    for entry in data:
-        name = entry.get("name")
-        url_path = entry.get("url") or entry.get("briefUrl")
-        if not name or not url_path:
-            continue
-        max_payout = entry.get("max_payout", 0) or 0
-        program_type = "VDP" if max_payout == 0 else "Paid"
-        full_url = url_path if url_path.startswith("http") else f"https://bugcrowd.com{url_path}"
-        out.append({
-            "name": name,
-            "url": full_url,
-            "type": program_type,
-        })
-    return out
+def save_cache(cache: dict):
+    with open(CACHE_FILE, "w", encoding="utf-8") as f:
+        json.dump(cache, f, indent=2)
 
 
-def parse_intigriti(data):
+def get_hackerone_vdps(keyword: str | None) -> list[dict]:
     """
-    Deliberately NOT guessing Paid vs VDP here - couldn't confirm the real
-    field name, and a wrong label is worse than no label. Marked "Program"
-    across the board until this is verified against live data.
+    HackerOne: offers_bounties is the only confirmed-reliable classification
+    field. offers_bounties == False means VDP (no bounty).
     """
-    out = []
-    for entry in data:
-        name = entry.get("name")
-        handle = entry.get("handle") or entry.get("companyHandle")
-        if not name:
+    data = fetch_json(HACKERONE_URL)
+    if data is None:
+        return []
+
+    results = []
+    for program in data:
+        if program.get("offers_bounties") is True:
+            continue  # paid program, skip — VDP only
+
+        name = program.get("name", "Unknown")
+        handle = program.get("handle", "")
+        url = program.get("url", f"https://hackerone.com/{handle}")
+
+        if keyword and keyword.lower() not in name.lower() and keyword.lower() not in handle.lower():
             continue
-        url = f"https://app.intigriti.com/programs/{handle}" if handle else "https://app.intigriti.com/researcher/programs"
-        out.append({
+
+        results.append({
+            "platform": "HackerOne",
             "name": name,
+            "handle": handle,
             "url": url,
-            "type": "Program",
         })
-    return out
+
+    return results
 
 
-PARSERS = {
-    "HackerOne": parse_hackerone,
-    "Bugcrowd": parse_bugcrowd,
-    "Intigriti": parse_intigriti,
-}
+def get_bugcrowd_listing(keyword: str | None) -> list[dict]:
+    """
+    Bugcrowd: no reliable field to auto-classify VDP vs Paid from this
+    dataset (max_payout is NOT reliable — see brief). We list programs from
+    the dataset for the "new program" diff mechanism, but flag every entry
+    as UNVERIFIED VDP status — cross-check manually against Bugcrowd's own
+    live-filtered VDP page before spending hunting time on it.
+    """
+    data = fetch_json(BUGCROWD_URL)
+    if data is None:
+        return []
+
+    results = []
+    for program in data:
+        name = program.get("name", "Unknown")
+        code = program.get("code", "")
+        url = program.get("url", f"https://bugcrowd.com/{code}")
+
+        if keyword and keyword.lower() not in name.lower() and keyword.lower() not in code.lower():
+            continue
+
+        results.append({
+            "platform": "Bugcrowd",
+            "name": name,
+            "handle": code,
+            "url": url,
+        })
+
+    return results
 
 
-def load_cache():
-    if CACHE_FILE.exists():
-        try:
-            return set(json.loads(CACHE_FILE.read_text(encoding="utf-8")))
-        except Exception:
-            return set()
-    return set()
+def diff_against_cache(programs: list[dict], cache_key: str, cache: dict) -> list[dict]:
+    seen = set(cache.get(cache_key, []))
+    new_programs = [p for p in programs if p["handle"] not in seen]
+    # update cache with everything seen this run
+    cache[cache_key] = list(seen | {p["handle"] for p in programs})
+    return new_programs
 
 
-def save_cache(urls):
-    CACHE_FILE.write_text(json.dumps(sorted(urls)), encoding="utf-8")
+def format_output(h1_new, bc_new, reset_cache: bool) -> str:
+    lines = []
+    lines.append(f"VDP Program Monitor — run at {datetime.now().strftime('%Y-%m-%d %H:%M')}")
+    lines.append("=" * 60)
+
+    tag = "ALL (cache reset)" if reset_cache else "NEW SINCE LAST RUN"
+
+    lines.append(f"\n--- HackerOne VDPs [{tag}] — fully classified via offers_bounties ---")
+    if h1_new:
+        for p in h1_new:
+            lines.append(f"  {p['name']}")
+            lines.append(f"    {p['url']}")
+    else:
+        lines.append("  (none new)")
+
+    lines.append(f"\n--- Bugcrowd listings [{tag}] — UNVERIFIED VDP status, check manually ---")
+    lines.append(f"  Cross-check against live filtered page: {BUGCROWD_LIVE_PAGE}")
+    if bc_new:
+        for p in bc_new:
+            lines.append(f"  {p['name']}")
+            lines.append(f"    {p['url']}")
+    else:
+        lines.append("  (none new)")
+
+    lines.append(f"\n--- Intigriti ---")
+    lines.append("  Not auto-classified — field names for Paid/VDP status were never")
+    lines.append("  confirmed from this dataset. Check live listings directly:")
+    lines.append(f"  {INTIGRITI_LIVE_PAGE}")
+
+    lines.append(f"\n--- Known limitations (not fabricated, deliberately omitted) ---")
+    lines.append("  Response efficiency, resolved-report count, and competition level")
+    lines.append("  are NOT available from this dataset. Check each program's own")
+    lines.append("  dashboard page manually before committing hunting hours.")
+
+    return "\n".join(lines)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="List new programs across HackerOne, Bugcrowd, Intigriti.")
-    parser.add_argument("--save", help="Save results to a text file", default=None)
-    parser.add_argument("--keyword", help="Only show programs whose name contains this keyword (case-insensitive)", default=None)
+    parser = argparse.ArgumentParser(description="Find newly-listed VDP programs.")
+    parser.add_argument("--keyword", help="Filter results by keyword in program name/handle")
+    parser.add_argument("--save", metavar="FILE", help="Save output to a text file")
     parser.add_argument("--force", action="store_true", help="Run even on a weekend")
-    parser.add_argument("--reset-cache", action="store_true", help="Ignore previous run history, show everything")
+    parser.add_argument("--reset-cache", action="store_true", help="Ignore history, show everything again")
     args = parser.parse_args()
 
-    today = datetime.now()
-    if today.weekday() >= 5 and not args.force:  # 5=Saturday, 6=Sunday
-        print(f"Today is {today.strftime('%A')} - skipping (weekends reserved for smart contract study).")
-        print("Run with --force if you want to check anyway.")
-        return
+    if datetime.now().weekday() >= 5 and not args.force:
+        print("Today is a weekend — smart-contract-security study day, skipping VDP scan.")
+        print("Use --force to run anyway.")
+        sys.exit(0)
 
-    seen = set() if args.reset_cache else load_cache()
-    new_seen = set(seen)
+    cache = {"hackerone": [], "bugcrowd": []} if args.reset_cache else load_cache()
 
-    lines = [f"Fetched {today.strftime('%Y-%m-%d %H:%M')} ({today.strftime('%A')})\n"]
+    print("Fetching HackerOne data...")
+    h1_all = get_hackerone_vdps(args.keyword)
+    print("Fetching Bugcrowd data...")
+    bc_all = get_bugcrowd_listing(args.keyword)
 
-    for platform, url in SOURCES.items():
-        lines.append(f"=== {platform} ===")
-        try:
-            raw = fetch_json(url)
-            parsed = PARSERS[platform](raw)
+    h1_new = diff_against_cache(h1_all, "hackerone", cache)
+    bc_new = diff_against_cache(bc_all, "bugcrowd", cache)
 
-            if args.keyword:
-                kw = args.keyword.lower()
-                parsed = [p for p in parsed if kw in p["name"].lower()]
+    save_cache(cache)
 
-            new_entries = [p for p in parsed if p["url"] not in seen]
-
-            if not parsed:
-                lines.append("  (no programs parsed - dataset structure may have changed)")
-            elif not new_entries:
-                lines.append(f"  No new programs since last run ({len(parsed)} total, all previously seen)")
-            else:
-                for p in new_entries[:50]:
-                    lines.append(f"  [{p['type']}] {p['name']}: {p['url']}")
-                    new_seen.add(p["url"])
-
-        except Exception as e:
-            lines.append(f"  Failed to fetch/parse: {e}")
-            lines.append(f"  Manual source: {url}")
-        lines.append("")
-
-    lines.append("Note: HackerOne response-efficiency filtering isn't available from this")
-    lines.append("data source - check hackerone.com/directory manually if that matters for")
-    lines.append("a specific program before committing hunting time to it.")
-
-    output = "\n".join(lines)
-    print(output)
+    output = format_output(h1_new, bc_new, args.reset_cache)
+    print("\n" + output)
 
     if args.save:
-        with open(args.save, "w", encoding="utf-8") as f:
-            f.write(output)
-        print(f"\nSaved to {args.save}")
-
-    save_cache(new_seen)
+        save_path = Path(args.save)
+        save_path.write_text(output, encoding="utf-8")
+        print(f"\n[Saved to {save_path}]")
 
 
 if __name__ == "__main__":
