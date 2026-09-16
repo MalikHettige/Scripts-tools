@@ -3,7 +3,7 @@ import requests
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-base_url = "https://0adf003c03f373298076d0b2005900ba.web-security-academy.net"
+base_url = "URL"
 long_pass = "A" * 500  # longer = bigger bcrypt gap
 
 with open("C:/Users/malik/Downloads/usernames.txt") as f:
