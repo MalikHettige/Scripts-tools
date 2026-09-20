@@ -19,6 +19,8 @@ Python fundamentals and security automation tools for bug bounty research and pe
 - API testing tools
 - Data parsing utilities
 - Security scanner wrappers
+- Authorization testing tools, including the IDOR matrix tester in
+  `authorization/idor-matrix/`
 
 ## Resources
 
