@@ -56,14 +56,6 @@ python3 response-timing-demonstration.py
 
 ---
 
-## 6. Uploading to this repo
-
-```bash
-git add response-timing-demonstration.py README.md example-output.png
-git commit -m "Add response timing enum script + usage notes"
-git push
-```
-
 # For solving the lab easily
 
 > Scripts used to solve the PortSwigger lab: **Username enumeration via response timing**  
