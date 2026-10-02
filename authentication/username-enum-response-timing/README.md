@@ -1,4 +1,4 @@
-# response-timing-demonstration.py
+# Response-timing-demonstration.py
 
 Tests whether a login endpoint leaks valid usernames via response timing — compares average response time for a known-fake username vs a known/candidate username over multiple repeats, to confirm a timing oracle.
 
@@ -10,7 +10,8 @@ If the file doesn't already exist in this directory:
 nano response-timing-demonstration.py
 ```
 
-Paste the script contents in, then save and exit:
+Paste the script contents in, then save and exit: 
+[Click this file to execute the script I built](https://github.com/MalikHettige/Scripts-tools/blob/main/authentication/username-enum-response-timing/response-timing-demonstration.py)
 
 ```
 Ctrl+O   (write out / save)
