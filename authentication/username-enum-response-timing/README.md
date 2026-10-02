@@ -8,9 +8,11 @@ Tests whether a login endpoint leaks valid usernames via response timing — com
 - Replace `"REPLACE_WITH_KNOWN_FAKE_USERNAME"` with a username certainly-doesn't-exist control.
 - Replace `REPLACE_WITH_YOUR_OWN_TEST_ACCOUNT` with your test account you use to attack
 - I Added a third slot `REPLACE_WITH_CANDIDATE_USERNAME` — since in real hunting I need all three. This 3rd one has to be something you aren't certain to exist, it's just random like `firstname.lastname@targetdomain.com`. Use this format if you want.
+
 ``
 The real candidate username should derived from a REAL employee name you found via LinkedIn/OSINT. you don't know if this exact person/format is correct, that's what you're testing
 ``
+
 4. X-Forwarded-For header — flagged as optional since not every target's rate-limiting setup needs this; blindly spoofing headers at a real target without knowing if it's needed is unnecessary noise.
 
 ## 1. Time to create the script
