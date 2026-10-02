@@ -5,6 +5,11 @@
 
 ---
 
+### Make sure to 
+- Replace ("C:/Users/malik/Downloads/passwords.txt") location with yours
+- Replace victim username in this line `data={"username": "VICTIM-USERNAME", "password": password},`
+- And in this as well `print(f"[{i}] [VICTIM-USERNAME]:{password} → {r.status_code}")`
+
 ## Directory Structure
 
 ```
