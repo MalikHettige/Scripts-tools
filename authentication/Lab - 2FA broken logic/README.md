@@ -2,7 +2,7 @@
 
 ## For real world hunt
 - Go the the python file
-- Press and hold Ctrl + F to find, search up `vicitm` and `cookie` `  URL` and replace with the real data.
+- Press and hold Ctrl + F to find, search up `vicitm` and `cookie`, `URL` and replace with the real data.
 - Execute in Linux terminal or Git bash
 
 ### The results would look like this
