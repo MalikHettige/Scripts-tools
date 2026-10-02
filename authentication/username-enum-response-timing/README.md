@@ -2,7 +2,15 @@
 
 Tests whether a login endpoint leaks valid usernames via response timing — compares average response time for a known-fake username vs a known/candidate username over multiple repeats, to confirm a timing oracle.
 
-## 1. Create the script
+## Before executing everything, make sure to update the script to your context
+1. In the script there is `base_url =`, replace its value with the target site's URL. Don't append with a slash.
+2. In `for username in` parameter:
+- Replace `"REPLACE_WITH_KNOWN_FAKE_USERNAME"` with a username certainly-doesn't-exist control.
+- Replace `REPLACE_WITH_YOUR_OWN_TEST_ACCOUNT` with your test account you use to attack
+- I Added a third slot `REPLACE_WITH_CANDIDATE_USERNAME` — since in real hunting I need all three. This 3rd one has to be something you aren't certain to exist, it's just random like `firstname.lastname@targetdomain.com`. Use this format if you want. To be clear, the real candidate username should derived from a REAL employee name you found via LinkedIn/OSINT. you don't know if this exact person/format is correct, that's what you're testing
+4. X-Forwarded-For header — flagged as optional since not every target's rate-limiting setup needs this; blindly spoofing headers at a real target without knowing if it's needed is unnecessary noise.
+
+## 1. Time to create the script
 
 If the file doesn't already exist in this directory:
 
@@ -45,16 +53,12 @@ python3 response-timing-demonstration.py
 
 <img width="593" height="351" alt="image" src="https://github.com/user-attachments/assets/7d158b13-4611-44db-91d6-f19b79a99856" />
 
----
-
 ## 5. How to read it
 
 - Both usernames should return the same status code (usually `200`) — the oracle is in the **timing**, not the status.
 - Compare the two **average** lines, not single attempts — one-off numbers are noise.
 - A consistent gap (tens to hundreds of ms) held across most attempts = real oracle. One outlier attempt is fine; ignore it.
 - If the averages are close and the two usernames' individual attempts overlap heavily — inconclusive, re-run with more attempts or investigate another angle (response length/content instead).
-
----
 
 # For solving the lab easily
 
