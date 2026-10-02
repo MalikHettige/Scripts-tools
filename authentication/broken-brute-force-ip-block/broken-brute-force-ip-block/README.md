@@ -17,9 +17,6 @@ broken-brute-force-ip-block/
 ├── README.md
 └── ip-block-bypass.py
 ```
-
----
-
 ## What to Replace
 
 ### File path
@@ -44,8 +41,6 @@ data={"username": "carlos", "password": password}
 ```
 Replace `"carlos"` with your target username.
 
----
-
 ## How the Bypass Works
 
 ```
@@ -57,8 +52,9 @@ Reset:      wiener + peter      → 302  (counter: 0)
 ```
 
 Counter never reaches lockout threshold. All passwords testable.
+**The result should look like this**
 
----
+<img width="598" height="455" alt="image" src="https://github.com/user-attachments/assets/e7c0ae97-9db6-4b2e-b656-ae0e2b21c11c" />
 
 ## Difference From Previous Labs
 
@@ -70,8 +66,6 @@ Counter never reaches lockout threshold. All passwords testable.
 
 Three different rate-limit bypass techniques — same goal.
 
----
-
 ## Real Bug Bounty Application
 
 1. Hit the limit on purpose — find the threshold (usually 3–10 attempts)
@@ -80,14 +74,10 @@ Three different rate-limit bypass techniques — same goal.
 4. Report: show the counter resets, demonstrate all passwords testable
 5. Never test on real users — use two accounts you own
 
----
-
 ## Usage
 
 ```bash
 python3 ip-block-bypass.py
 ```
-
----
 
 **Tags:** `#IPBlock` `#RateLimitBypass` `#BruteForce` `#Python` `#PortSwigger`
