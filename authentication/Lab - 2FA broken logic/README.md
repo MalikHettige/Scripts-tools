@@ -22,7 +22,10 @@
 - you don't need to exhaust all 10,000 to make the point.
 - Partial proof + extrapolated math in your report beats a full live brute-force almost every time.
 
-**Lab:** PortSwigger Web Security Academy — 2FA broken logic
+---
+
+
+# **Lab:** PortSwigger Web Security Academy — 2FA broken logic
 
 This script was written specifically for the lab to demonstrate the **broken 2FA verification logic**.
 
