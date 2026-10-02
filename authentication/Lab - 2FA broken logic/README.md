@@ -1,5 +1,10 @@
 ## Purpose
 
+## For real world hunt
+- Go the the python file
+- Press and hold Ctrl + F to find, search up `vicitm` and `cookie` `  URL` and replace with the real data.
+- Execute in Linux terminal or Git bash
+
 **Lab:** PortSwigger Web Security Academy — 2FA broken logic
 
 This script was written specifically for the lab to demonstrate the **broken 2FA verification logic**.
