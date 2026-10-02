@@ -5,6 +5,9 @@
 - Press and hold Ctrl + F to find, search up `vicitm` and `cookie` `  URL` and replace with the real data.
 - Execute in Linux terminal or Git bash
 
+### The results would look like this
+<img width="1269" height="252" alt="image" src="https://github.com/user-attachments/assets/7380412c-62cc-42e6-afc9-014eb039996d" />
+
 **Lab:** PortSwigger Web Security Academy — 2FA broken logic
 
 This script was written specifically for the lab to demonstrate the **broken 2FA verification logic**.
