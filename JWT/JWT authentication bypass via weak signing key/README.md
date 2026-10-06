@@ -3,7 +3,7 @@
 So the process of the server allowing any authenticated user to travel to any path in the application is vary when the session cookie is JWT-based. When a user requests a certain path the server checks the payload segment of the token and verifies with the signature (instructed by `alg` value) and used against the private key. The bug in this specific lab/application is that the private key is crackable cause it is guessable.
 
 ### How to get triggered by this bug?
-Always make sure to check if the token of JWT-based cookie's `alg` value is **HS256**, if it is the opportunity. **any time you see HS256 in a JWT header, attempt a secret brute-force by default**
+Always make sure to check if the token of JWT-based cookie's `alg` value is **HS256**, it is the opportunity. **any time you see HS256 in a JWT header, attempt a secret brute-force by default**
 
 ### How to brute force? 
 Well there are several ways, main ones I know are via **Hashcat** or or by using a python script. I chose python script. Either of them is fine. 
