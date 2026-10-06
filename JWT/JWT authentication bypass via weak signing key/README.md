@@ -10,11 +10,11 @@ Well there are several ways, main ones I know are via **Hashcat** or or by using
 
 **Note:** This can also be used for Horizontal access if you replace `administrator` with the victim's username in `sub` parameter of the script
 
-1. Requires **Python + pip** so install them if you haven't by running ``pip install pyjwt`` in your **GIT BASH**.
+1. Requires **Python + pip** so install them if you haven't by running ```pip install pyjwt``` in your **GIT BASH**.
 2. Make sure you have **JWT editor** burp extension installed and enabled (use a standalone command-line tool, or are switching to alternative intercepting proxies if JWT editor does not suit)
-3. Download the wordlist if you haven't: ``curl -O https://raw.githubusercontent.com/wallarm/jwt-secrets/master/jwt.secrets.list``
+3. Download the wordlist if you haven't: ```curl -O https://raw.githubusercontent.com/wallarm/jwt-secrets/master/jwt.secrets.list```
 4. Paste [this script](https://github.com/MalikHettige/Scripts-tools/blob/main/JWT/JWT%20authentication%20bypass%20via%20weak%20signing%20key/cracking_script.py) but make sure to replace **"PASTE_YOUR_FULL_JWT_HERE"** with your entire JWT-based cookie.
-5. Run the script ``python crack_jwt.py``
+5. Run the script ```python crack_jwt.py```
 6. After the results appeared, the secret code will be shown as ``[+] FOUND SECRET: secret1``
 7. Copy the value, run [this script](https://github.com/MalikHettige/Scripts-tools/blob/main/JWT/JWT%20authentication%20bypass%20via%20weak%20signing%20key/forge_the_admin_token.py) to forge the admin token. Make sure to replace `APPLICATION_ISSUER` with the application's issuer, it can be found when you locate the `iss` section in **JWT web token/JWT editor**
 8. And at the bottom of the results (likely below `return self._jws.encode(`) the session cookie of administrator is shown. 
