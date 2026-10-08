@@ -1,6 +1,6 @@
 # Python Programming
 
-Python fundamentals and security automation tools for bug bounty research and penetration testing.
+Python fundamentals and security automation tools for bug bounty research and penetration testing. [Featured script](https://github.com/MalikHettige/Scripts-tools/blob/main/JWT/JWT%20authentication%20bypass%20via%20weak%20signing%20key/README.md) 
 
 ## Topics Covered
 
