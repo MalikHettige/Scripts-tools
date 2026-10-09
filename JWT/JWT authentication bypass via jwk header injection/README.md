@@ -45,9 +45,10 @@ Paste this block, don't forget to replace ```<paste JWK>``` with your JWK (right
 
 ```bash
 cat << 'EOF' > key.json
-<paste JWK>
+<paste the JWK you just copied from Burp>
 EOF
 python3 jwt_header_builder.py key.json
+rm key.json #use this if u want the file to be deleted after giving the results
 ```
 
 ## Output
