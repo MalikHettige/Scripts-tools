@@ -45,6 +45,7 @@ Paste the relevant block directly into Burp's JWT Editor header field (for `jwk`
 
 ## Example
 
+<img width="1919" height="805" alt="image" src="https://github.com/user-attachments/assets/2f150e4f-5666-4090-b86a-090dc3096453" />
 
 ## Notes
 
