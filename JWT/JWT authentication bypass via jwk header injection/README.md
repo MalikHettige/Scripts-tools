@@ -1,0 +1,1 @@
+I struggled coverting my copied JWK of a new RSA key into a executable format of the header section on JWT web token panel. When I have to turn a new JWK into that format i figured it would be a better idea to use an automated script.
