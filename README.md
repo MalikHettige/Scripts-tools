@@ -1,33 +1,23 @@
-# Python Programming
+# Scripts-tools
 
-Python fundamentals and security automation tools for bug bounty research and penetration testing. [Featured script](https://github.com/MalikHettige/Scripts-tools/blob/main/JWT/JWT%20authentication%20bypass%20via%20weak%20signing%20key/README.md) 
+## Highlights
+- [Broken brute-force protection — multiple credentials per request](https://github.com/MalikHettige/Scripts-tools/blob/main/authentication/Broken%20brute-force%20protection%2C%20multiple%20credentials%20per%20request/README.md)
+- [JWT algorithm confusion — no exposed key](https://github.com/MalikHettige/Scripts-tools/blob/main/JWT/JWT%20authentication%20bypass%20via%20algorithm%20confusion%20with%20no%20exposed%20key/README.md)
+  
+Scripts and tooling for bug bounty hunting — organized by vulnerability class, built while solving PortSwigger labs and adapted for real-world (RW) use. Each subfolder targets a specific technique, with a README explaining the mechanism, dependencies, and generic usage. 
 
-## Topics Covered
+## Structure
 
-| Topic | Focus |
-|-------|-------|
-| Basics | Variables, data types, control flow, functions |
-| OOP | Classes, inheritance, polymorphism, decorators |
-| File I/O | Reading, writing, parsing files |
-| Networking | Requests library, HTTP clients, sockets |
-| Automation | Scripts for reconnaissance, scanning, exploitation |
-| Libraries | BeautifulSoup, requests, json, re, paramiko |
+Scripts are organized by vulnerability category, e.g.:
 
-## Projects
+- `JWT/` — JWT forgery and bypass techniques (weak secret cracking, alg:none, kid path traversal, jwk header injection, algorithm confusion with and without exposed keys)
+- `authorization/` — access control testing tools, including the IDOR matrix tester in `authorization/idor-matrix/`
 
-- Recon automation scripts
-- API testing tools
-- Data parsing utilities
-- Security scanner wrappers
-- Authorization testing tools, including the IDOR matrix tester in
-  `authorization/idor-matrix/`
 
-## Resources
+## Philosophy
 
-- [Python Official Docs](https://docs.python.org/3/)
-- [Real Python](https://realpython.com/)
-- [Python Security Libraries](https://awesome-python.com/#security)
+Most scripts here started as one-off solutions to a specific lab, then got generalized with placeholder values (uppercase, e.g. `TARGET_USERNAME`) so they're directly reusable against real targets without rewriting from scratch. Each subfolder's own README documents the specific technique, required dependencies, and exact usage.
 
----
+## Related
 
-**Status**: Active learning | **Last Updated**: July 2026
+- Writeups: https://github.com/MalikHettige/Bug-bounty-writeups
