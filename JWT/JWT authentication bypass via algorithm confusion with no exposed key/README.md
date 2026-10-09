@@ -28,8 +28,37 @@ instead of fetched directly.
 python forge_token.py candidate1.pem
 python forge_token.py candidate2.pem
 ```
-
 5. Test each output token against the protected endpoint.
+
+---
+### full install block
+**For linux users**
+
+```bash
+# Linux VM version of the pip installs above
+pip install gmpy2 --break-system-packages
+pip install asn1tools --break-system-packages
+pip install pycryptodomex --break-system-packages
+pip install ratelimit --break-system-packages
+pip install termcolor --break-system-packages
+```
+**For users with windows or anything other than Linux, use Git bash**
+
+```bash
+# Core dependencies for rsa_sign2n (public key derivation)
+pip install gmpy2
+pip install asn1tools
+pip install pycryptodomex
+
+# jwt_tool dependencies (only needed if also using jwt_tool directly, 
+# not required for forge_token.py alone)
+pip install ratelimit
+pip install termcolor
+
+# Clone the tools (skip if already cloned)
+git clone https://github.com/ticarpi/jwt_tool
+git clone https://github.com/silentsignal/rsa_sign2n
+```
 
 ## Related writeup
 https://github.com/MalikHettige/Bug-bounty-writeups/blob/main/[path-to-writeup].md
