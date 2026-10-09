@@ -1,39 +1,56 @@
-I struggled coverting my copied JWK of a new RSA key into a executable format of the header section on JWT web token panel. When I have to turn a new JWK into that format i figured it would be a better idea to use an automated script.
-
 # JWK Header Builder
 
 A small utility that takes a full RSA JWK (as copied from Burp Suite's JWT Editor, including private key fields) and strips it down to the public-only fields, then prints ready-to-use JWT header blocks for both `jwk` header injection and `jku` header injection attacks — plus the JWKS document you need to host for the `jku` variant.
 
 ## Why this exists
 
-When testing JWT authentication bypass via `jwk` or `jku` header injection, a common mistake is accidentally pasting the **full key object** (including private fields like `d`, `p`, `q`, `qi`, `dp`, `dq`) into the JWT header or exploit server body instead of the public-only fields. This script removes that manual step entirely.
+When testing JWT authentication bypass via `jwk` or `jku` header injection, a common mistake is accidentally pasting the **full key object** (including private fields like `d`, `p`, `q`, `qi`, `dp`, `dq`) into the JWT header or exploit server body instead of the public-only fields. This script removes that manual step entirely. Choosing an AI for this is also a good choice but I don't think sharing a sensitive crafted public/private key of a real world website is the best approach.
 
 ## Requirements
 
 - Python 3
-
 No external libraries needed — uses only the standard library (`json`, `sys`).
 
-## Usage
+## Option A
 
-**1. Save your JWK to a file.**
-
-Copy the key from Burp (right-click your RSA key in JWT Editor → Copy Public Key as JWK, or copy the full key dialog if that's all that's available), then create a file with it:
-
+Clone the repo and run directly — the script is already there, no setup needed:
 ```bash
+git clone https://github.com/MalikHettige/Scripts-tools.git
+cd Scripts-tools/JWT/jwk-jku-header-builder
+```
+And paste this block (replace the 2nd line with the JWK)
+```
 cat << 'EOF' > key.json
 <paste your JWK JSON here>
 EOF
+python3 jwt_header_builder.py key.json
 ```
 
+## Option B (no cloning needed, just create the file and execute)
+**1. Save your JWK to a file.**
+Run the script and confirm the file is created by running 
+```bash
+ls -la key.json
+```
+The result would be something like :
+```-rw-r--r-- 1 malik 197609 1723 Oct  9 15:34 key.json```
+
+**That confirms it worked correctly:**
+
+```-rw-r--r--``` → normal readable/writable file
+```key.json``` → correct filename
+
 **2. Run the script against that file:**
+Paste this block, don't forget to replace ```<paste JWK>``` with your JWK (right-click your RSA key in JWT Editor → Copy Public Key as JWK,)
 
 ```bash
+cat << 'EOF' > key.json
+<paste JWK>
+EOF
 python3 jwt_header_builder.py key.json
 ```
 
 ## Output
-
 The script prints four blocks:
 
 1. **Clean public JWK** — only `kty`, `e`, `kid`, `n` (and `use`/`alg` if present) — all private key material stripped out
@@ -45,7 +62,7 @@ Paste the relevant block directly into Burp's JWT Editor header field (for `jwk`
 
 ## Example
 
-<img width="1919" height="805" alt="image" src="https://github.com/user-attachments/assets/2f150e4f-5666-4090-b86a-090dc3096453" />
+<img width="1919" height="805" alt="image" src="https://github.com/user-attachments/assets/b4f2b6e6-c607-4365-a571-4aa6322e6e41" />
 
 ## Notes
 
