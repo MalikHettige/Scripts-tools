@@ -1,6 +1,6 @@
 # JWT Authentication Bypass via Algorithm Confusion (No Exposed Key)
 
-Scripts used to forge an admin JWT when the server's RS256 public key 
+Script used to forge an admin JWT when the server's RS256 public key 
 is NOT published anywhere (no `/jwks.json` or similar), requiring the 
 public key to be mathematically derived from two valid signed tokens 
 instead of fetched directly.
@@ -8,8 +8,7 @@ instead of fetched directly.
 ## Dependencies
 - `rsa_sign2n` (https://github.com/silentsignal/rsa_sign2n) — derives 
   candidate public keys from two valid RS256-signed JWTs
-- Python `hmac`, `hashlib`, `base64`, `json` (standard library only for 
-  the forging scripts themselves)
+- Python `hmac`, `hashlib`, `base64`, `json`, `sys` (standard library only)
 
 ## Workflow
 1. Obtain two valid, differently-signed RS256 tokens from the target 
@@ -17,21 +16,20 @@ instead of fetched directly.
 2. Run `rsa_sign2n`'s `jwt_forgery.py` against both tokens — it outputs 
    one or more candidate public keys as `.pem` files (derivation from 
    signatures isn't always unique, hence multiple candidates).
-3. For each candidate `.pem`, run the matching forge script here — it 
-   reads the raw PEM bytes and uses them directly as the HS256 HMAC 
-   secret (the "confusion" — RS256's public key reused as HS256's key) 
-   to sign a forged token with `sub: administrator`.
-4. Test each forged token against the protected endpoint until one 
-   succeeds (candidate #1 failed in testing, candidate #2 worked — 
-   keep trying all candidates if the first doesn't land).
+3. Before running `forge_token.py`, edit these placeholders in the script:
+   - `TARGET_KID_VALUE` — the `kid` from the target's real JWT header
+   - `TARGET_ISSUER` — the `iss` from the target's real JWT payload 
+     (omit the line if the app doesn't use one)
+   - `TARGET_USERNAME` — the identity being forged (e.g. `administrator`)
+4. Run the script, passing each candidate PEM filename as an argument, 
+   until one produces a working forged token:
 
-## Usage
 ```bash
-python forge_admin_candidate1.py
-python forge_admin_candidate2.py
+python forge_token.py candidate1.pem
+python forge_token.py candidate2.pem
 ```
-Each prints a complete forged JWT. Edit the `kid` and payload fields 
-in the script to match your target's token structure before running.
+
+5. Test each output token against the protected endpoint.
 
 ## Related writeup
 https://github.com/MalikHettige/Bug-bounty-writeups/blob/main/[path-to-writeup].md
