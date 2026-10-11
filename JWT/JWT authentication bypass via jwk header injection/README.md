@@ -1,73 +1,54 @@
 # JWK Header Builder
 
-A small utility that takes a full RSA JWK (as copied from Burp Suite's JWT Editor, including private key fields) and strips it down to the public-only fields, then prints ready-to-use JWT header blocks for both `jwk` header injection and `jku` header injection attacks — plus the JWKS document you need to host for the `jku` variant.
-
-## Why this exists
-
-When testing JWT authentication bypass via `jwk` or `jku` header injection, a common mistake is accidentally pasting the **full key object** (including private fields like `d`, `p`, `q`, `qi`, `dp`, `dq`) into the JWT header or exploit server body instead of the public-only fields. This script removes that manual step entirely. Choosing an AI for this is also a good choice but I don't think sharing a sensitive crafted public/private key of a real world website is the best approach.
+A small local utility for preparing JWT headers and a hosted JWKS from an RSA JWK. It keeps only public key fields in generated output, so private key parameters are not copied into the JWT header or JWKS.
 
 ## Requirements
 
 - Python 3
-No external libraries needed — uses only the standard library (`json`, `sys`).
+- No external packages; the script uses only the Python standard library.
 
-## Option A
+## Run interactively
 
-Clone the repo and run directly — the script is already there, no setup needed:
+From this directory, run:
+
 ```bash
-git clone https://github.com/MalikHettige/Scripts-tools.git
-cd Scripts-tools/JWT/jwk-jku-header-builder
+python3 jwt_header_builder.py
 ```
-And paste this block (replace the 2nd line with the JWK)
+
+Paste either a raw RSA JWK or a JWKS JSON object when prompted. Multiline JSON is supported. If a JWKS contains multiple RSA keys, the script uses the first one. After the key JSON is accepted, paste the URL where you plan to host the JWKS.
+
+The script then prints:
+
+1. The clean public RSA JWK.
+2. A JWT header with the public JWK embedded in its `jwk` field.
+3. A JWT header with the supplied URL in its `jku` field.
+4. Exploit-server-ready output at the bottom: file path `/exploit`, `Content-Type: application/json`, and the full JWKS body to host at that URL.
+
+If the input key includes a `kid`, it is retained in the public JWK and generated headers. If it has no `kid`, the outer header uses `<SET_KID>` as a reminder to set a matching key ID before using the output.
+
+## Use a JSON file instead
+
+The script also accepts a file path containing a raw RSA JWK or JWKS:
+
+```bash
+python3 jwt_header_builder.py key.json
 ```
-cat << 'EOF' > key.json
-<paste your JWK JSON here>
+
+It will prompt for the hosted JWKS URL after loading the file. For example, to create a file from a pasted JSON block:
+
+```bash
+cat > key.json <<'EOF'
+<paste your RSA JWK or JWKS JSON here>
 EOF
 python3 jwt_header_builder.py key.json
 ```
 
-## Option B (no cloning needed, just create the file and execute)
-**1. Save your JWK to a file.**
-Run the script and confirm the file is created by running 
-```bash
-ls -la key.json
-```
-The result would be something like :
-```-rw-r--r-- 1 malik 197609 1723 Oct  9 15:34 key.json```
+Delete the input file when you no longer need it, especially if it contains private RSA parameters.
 
-**That confirms it worked correctly:**
+## Using the output
 
-```-rw-r--r--``` → normal readable/writable file
-```key.json``` → correct filename
+- Copy the `jwk` header into the JWT header when testing a `jwk` header configuration.
+- Use the `jku` header and host the printed JWKS body at the matching exploit-server path when testing a `jku` header configuration.
+- The script only transforms JSON locally. It does not sign tokens, host the JWKS, or send network requests. Configure the exploit server response with the printed path, content type, and body.
 
-**2. Run the script against that file:**
-Paste this block, don't forget to replace ```<paste JWK>``` with your JWK (right-click your RSA key in JWT Editor → Copy Public Key as JWK,)
-
-```bash
-cat << 'EOF' > key.json
-<paste the JWK you just copied from Burp>
-EOF
-python3 jwt_header_builder.py key.json
-rm key.json #use this if u want the file to be deleted after giving the results
-```
-
-## Output
-The script prints four blocks:
-
-1. **Clean public JWK** — only `kty`, `e`, `kid`, `n` (and `use`/`alg` if present) — all private key material stripped out
-2. **`jwk` header** — a ready JWT header with the public key embedded inline, for `jwk` header injection
-3. **`jku` header** — a ready JWT header with a placeholder URL, for `jku` header injection (replace `<YOUR_JWKS_URL>` with your hosted endpoint)
-4. **JWKS body** — the `{"keys": [...]}` document to host at your `jku` URL
-
-Paste the relevant block directly into Burp's JWT Editor header field (for `jwk`/`jku` injection) or your exploit server's response body (for the JWKS document).
-
-## Example
-
-<img width="1919" height="805" alt="image" src="https://github.com/user-attachments/assets/b4f2b6e6-c607-4365-a571-4aa6322e6e41" />
-
-## Notes
-
-- The outer `kid` and the `kid` inside the embedded `jwk` (or inside the hosted JWKS) must match — the script handles this automatically by using the same `kid` from your input key throughout all output blocks.
-- When signing the forged JWT in Burp, make sure you select the **same RSA key** whose public half you embedded — signing with a different key will produce a signature that doesn't match.
-- In Burp's JWT Editor, check **"Don't modify header"** when signing, otherwise Burp may silently overwrite your manually-set `jwk`/`jku` fields with its own default behavior.
-- This script does not fetch, host, or send anything — it only transforms JSON locally. You still need to manually host the JWKS body (e.g. on an exploit server or static host) for the `jku` variant, and manually paste the headers into your intercepting proxy.
+When signing a test token, use the same RSA key whose public half is embedded in the `jwk` header or served in the JWKS. Keep the key ID (`kid`) consistent with the key used by the target test setup.
