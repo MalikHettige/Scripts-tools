@@ -42,6 +42,12 @@ python3 "$HOME/Documents/GitHub/Scripts-tools/JWT/JWT authentication bypass via 
   --sub administrator
 ```
 
+Or if you have it somewhere imported, in a specific folder or something, run:
+```bash
+cd ~/python-tools
+python3 jwt_weak_key_solver.py --token "<your NEW token>" --wordlist jwt.secrets.list --sub administrator
+```
+
 (The wordlist isn't checked into the repo — download it once with the `curl` command above and keep it alongside the script.)
 
 ## Ordered steps
