@@ -12,7 +12,7 @@ A small local utility for preparing JWT headers and a hosted JWKS from an RSA JW
 From this directory, run:
 
 ```bash
-python3 jwt_header_builder.py
+python3 "JWT/JWT authentication bypass via jwk header injection/jwt_header_builder.py"
 ```
 
 Paste either a raw RSA JWK or a JWKS JSON object when prompted. Multiline JSON is supported. If a JWKS contains multiple RSA keys, the script uses the first one. After the key JSON is accepted, paste the URL where you plan to host the JWKS.
@@ -23,6 +23,9 @@ The script then prints:
 2. A JWT header with the public JWK embedded in its `jwk` field.
 3. A JWT header with the supplied URL in its `jku` field.
 4. Exploit-server-ready output at the bottom: file path `/exploit`, `Content-Type: application/json`, and the full JWKS body to host at that URL.
+
+**This is how it'd show**
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/100dbce6-2b41-4078-bb44-0bd151aad7da" />
 
 If the input key includes a `kid`, it is retained in the public JWK and generated headers. If it has no `kid`, the outer header uses `<SET_KID>` as a reminder to set a matching key ID before using the output.
 
