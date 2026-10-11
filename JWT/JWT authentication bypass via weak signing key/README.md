@@ -48,6 +48,9 @@ cd ~/python-tools
 python3 jwt_weak_key_solver.py --token "<your NEW token>" --wordlist jwt.secrets.list --sub administrator
 ```
 
+**It would look like:**
+<img width="1919" height="333" alt="image" src="https://github.com/user-attachments/assets/fd8f8d19-4651-4d68-8336-6887152bedcb" />
+
 (The wordlist isn't checked into the repo — download it once with the `curl` command above and keep it alongside the script.)
 
 ## Ordered steps
