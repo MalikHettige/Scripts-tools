@@ -36,13 +36,7 @@ git clone https://github.com/MalikHettige/scripts-tools.git "$HOME/Documents/Git
 Then, from anywhere:
 
 ```bash
-python3 "$HOME/Documents/GitHub/Scripts-tools/JWT/general-jwk-jku-tooling/jwtgen.py"
-```
-
-If you want a shorter command for repeat use, add your own alias in `~/.bashrc` (this is a personal convenience, not something the script requires):
-
-```bash
-alias jwtgen="python3 \"$HOME/Documents/GitHub/Scripts-tools/JWT/general-jwk-jku-tooling/jwtgen.py\""
+python3 ~/GitHub/Scripts-tools/JWT/general-jwk-jku-tooling/jwtgen.py
 ```
 
 ## Usage
@@ -56,32 +50,7 @@ Run the script, then:
 5. The script prints the clean public JWK, the `jwk` header block, the `jku` header block, the JWKS body to host, and (if a URL was given) the full `jku` URL for reference.
 
 ### Example
-
-```
-$ python3 jwtgen.py
-=== JWT Hunter Toolkit ===
-
-Paste the public JWK JSON (from Burp's 'Copy Public Key as JWK'):
-(paste it, then press Enter on an empty line to finish — or just press Enter to skip)
-{"kty": "RSA", "e": "AQAB", "n": "m0UATz...w"}
-
-No kid found in the pasted key — generated one: e4b12e9b-8884-4161-ae55-692bc6469652
-
-Hosting URL for jku (press Enter to skip): https://example.com/jwks.json
-Separate URL for the JWKS endpoint, if different (press Enter to reuse the above):
-
-==================================================
-jwk HEADER (embedded key injection)
-==================================================
-{
-    "kid": "e4b12e9b-8884-4161-ae55-692bc6469652",
-    "typ": "JWT",
-    "alg": "RS256",
-    "jwk": { "kty": "RSA", "e": "AQAB", "n": "m0UATz...w", "kid": "e4b12e9b-..." }
-}
-...
-Done.
-```
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/0199b42c-9d17-4149-9014-c020b9109be8" />
 
 ## Notes
 
