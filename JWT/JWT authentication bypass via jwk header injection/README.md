@@ -7,13 +7,34 @@ A small local utility for preparing JWT headers and a hosted JWKS from an RSA JW
 - Python 3
 - No external packages; the script uses only the Python standard library.
 
-## Run interactively
+## Just want one result? (no repo, no setup)
 
-From this directory, run:
+If you only need this once and don't want to clone the repo, download the single script and run it:
 
 ```bash
-python3 "JWT/JWT authentication bypass via jwk header injection/jwt_header_builder.py"
+curl -o jwt_header_builder.py "https://raw.githubusercontent.com/MalikHettige/scripts-tools/main/JWT/JWT%20authentication%20bypass%20via%20jwk%20header%20injection/jwt_header_builder.py"
+python3 jwt_header_builder.py
 ```
+
+Then follow the prompts below. Delete the script afterward if you don't need it again.
+
+## Frequent use (clone and keep)
+
+If you hunt with this regularly, clone the repo once and run it by path whenever you need it:
+
+```bash
+git clone https://github.com/MalikHettige/scripts-tools.git "$HOME/Documents/GitHub/Scripts-tools"
+```
+
+Then, from anywhere:
+
+```bash
+python3 "$HOME/Documents/GitHub/Scripts-tools/JWT/JWT authentication bypass via jwk header injection/jwt_header_builder.py"
+```
+
+To stay current, `cd` into the cloned folder and `git pull` before a session.
+
+## What happens when you run it
 
 Paste either a raw RSA JWK or a JWKS JSON object when prompted. Multiline JSON is supported. If a JWKS contains multiple RSA keys, the script uses the first one. After the key JSON is accepted, paste the URL where you plan to host the JWKS.
 
