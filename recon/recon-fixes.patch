@@ -1,0 +1,295 @@
+diff --git a/recon/enrich_example.py b/recon/enrich_example.py
+index b8e9346..67ebb65 100644
+--- a/recon/enrich_example.py
++++ b/recon/enrich_example.py
+@@ -8,34 +8,94 @@ BAC/API/IDOR/auth/business-logic/race-condition hunting. Kept minimal on
+ purpose rather than built out further.
+ """
+ import os
++import re
+ import sys
+ import json
++import time
++from urllib.parse import quote
++
+ import requests
+ from pathlib import Path
+ 
+ API_KEY = os.getenv("VT_API_KEY")
+ ENDPOINT = "https://www.virustotal.com/api/v3/domains/{}"
+ OUTDIR = Path("enrich_output")
+-OUTDIR.mkdir(exist_ok=True)
+ 
++# Loose but strict-enough hostname check: labels of letters/digits/hyphens,
++# dot-separated. Rejects path separators, whitespace, and anything else that
++# could be used to escape OUTDIR or break the request path.
++_DOMAIN_RE = re.compile(
++    r"^(?=.{1,253}$)(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,63}$"
++)
++
++
++def safe_filename(domain: str) -> str:
++    """Build a filesystem-safe filename for `domain` with no traversal risk."""
++    # Belt-and-braces even though validate_domain() already rejects anything
++    # that isn't a bare hostname: strip any path separators before using the
++    # value in a path, and fall back to a hash if nothing alnum is left.
++    cleaned = re.sub(r"[^A-Za-z0-9.-]", "_", domain)
++    cleaned = cleaned.strip(".")
++    if not cleaned or cleaned in {".", ".."}:
++        import hashlib
++        cleaned = hashlib.sha256(domain.encode("utf-8")).hexdigest()
++    return cleaned
++
++
++def validate_domain(domain: str) -> str:
++    domain = domain.strip()
++    if not _DOMAIN_RE.match(domain):
++        sys.exit(
++            f"'{domain}' doesn't look like a bare hostname (e.g. example.com). "
++            "Refusing to use it in a file path or API request."
++        )
++    return domain
+ 
+-def enrich_domain(domain):
++
++def enrich_domain(domain, max_retries=3):
+     if not API_KEY:
+         sys.exit("Set the VT_API_KEY environment variable before running this script.")
+ 
++    domain = validate_domain(domain)
++    OUTDIR.mkdir(exist_ok=True)
++
+     headers = {"x-apikey": API_KEY}
+-    r = requests.get(ENDPOINT.format(domain), headers=headers, timeout=15)
+-    if r.status_code == 200:
+-        data = r.json()
+-    else:
+-        data = {"error": {"status": r.status_code, "text": r.text}}
++    url = ENDPOINT.format(quote(domain, safe=""))
++
++    data = None
++    for attempt in range(1, max_retries + 1):
++        try:
++            r = requests.get(url, headers=headers, timeout=15)
++        except requests.RequestException as exc:
++            if attempt == max_retries:
++                data = {"error": {"status": None, "text": f"request failed: {exc}"}}
++                break
++            time.sleep(2 ** attempt)
++            continue
++
++        if r.status_code == 200:
++            data = r.json()
++            break
++        elif r.status_code == 429 and attempt < max_retries:
++            # Rate-limited: back off and retry rather than silently recording a 429.
++            retry_after = int(r.headers.get("Retry-After", 2 ** attempt))
++            time.sleep(retry_after)
++            continue
++        else:
++            data = {"error": {"status": r.status_code, "text": r.text}}
++            break
+ 
+     summary = {
+         "domain": domain,
+         "last_analysis_stats": data.get("data", {}).get("attributes", {}).get("last_analysis_stats"),
+         "whois": data.get("data", {}).get("attributes", {}).get("whois"),
+     }
+-    out = OUTDIR / f"{domain}.json"
++
++    out = OUTDIR / f"{safe_filename(domain)}.json"
++    # Defense in depth: even with validate_domain()/safe_filename() in place,
++    # confirm the resolved path never escapes OUTDIR before writing.
++    if OUTDIR.resolve() not in out.resolve().parents and out.resolve() != OUTDIR.resolve():
++        sys.exit(f"Refusing to write outside {OUTDIR}: resolved to {out.resolve()}")
+     out.write_text(json.dumps({"raw": data, "summary": summary}, indent=2))
+     print(f"Saved {out}")
+     return summary
+@@ -45,4 +105,4 @@ if __name__ == "__main__":
+     if len(sys.argv) < 2:
+         print("Usage: VT_API_KEY=xxx python enrich_example.py domain.com")
+         sys.exit(2)
+-    print(enrich_domain(sys.argv[1]))
+\ No newline at end of file
++    print(enrich_domain(sys.argv[1]))
+diff --git a/recon/reportgen.py b/recon/reportgen.py
+index 690cf28..d313dd0 100644
+--- a/recon/reportgen.py
++++ b/recon/reportgen.py
+@@ -17,6 +17,7 @@ version.
+ import argparse
+ import json
+ import re
++import shlex
+ import sys
+ from pathlib import Path
+ from typing import Any, Dict, List, Optional
+@@ -82,6 +83,16 @@ def select_finding(findings: List[Dict[str, Any]], selector: Optional[str]) -> O
+     return None
+ 
+ 
++def safe_score(value: Any) -> int:
++    """Coerce a finding's score to int for sorting/ranking, tolerating
++    missing or malformed values (e.g. a hand-edited or third-party-produced
++    findings file) instead of crashing the whole run."""
++    try:
++        return int(value)
++    except (TypeError, ValueError):
++        return 0
++
++
+ def host_from_url(url: str) -> str:
+     try:
+         return urlparse(url).netloc or url
+@@ -97,7 +108,9 @@ def build_context(finding: Dict[str, Any], title_prefix: str) -> Dict[str, Any]:
+     tags = finding.get("tags") or []
+     if isinstance(tags, str):
+         tags = [t.strip() for t in tags.split(",") if t.strip()]
+-    title = finding.get("title") or finding.get("details", {}).get("title")
++    details_raw = finding.get("details")
++    details_safe: Dict[str, Any] = details_raw if isinstance(details_raw, dict) else {}
++    title = finding.get("title") or details_safe.get("title")
+     if not title:
+         title = f"{severity} issue: {host_from_url(url)}"
+ 
+@@ -121,9 +134,20 @@ def build_context(finding: Dict[str, Any], title_prefix: str) -> Dict[str, Any]:
+         "Validate with a second check after remediation to confirm the issue is no longer reachable.",
+     ]
+ 
+-    curl_cmd = f"curl -sS -D - -o /dev/null '{url}'"
++    # shlex.quote (not an f-string with a bare '{url}') because `url` is
++    # attacker-influenced (scraped/crawled/fuzzed from the target) and this
++    # command is meant to be copy-pasted straight into a shell by the analyst.
++    # An unescaped single quote in the URL would otherwise break out of the
++    # quoting and let arbitrary shell commands run when the line is pasted.
++    quoted_url = shlex.quote(url)
++    curl_cmd = f"curl -sS -D - -o /dev/null {quoted_url}"
+     if status is not None:
+-        curl_cmd = f"curl -sS -D - -o /dev/null -w 'HTTP %{http_code}\n' '{url}'"
++        # Literal %{http_code} is curl's own -w syntax, not a Python format
++        # field, so it must not sit inside an f-string (the original code
++        # had `f"...%{http_code}\n..."`, which Python tried to evaluate as
++        # a variable named http_code and raised NameError on every finding
++        # that had a status).
++        curl_cmd = "curl -sS -D - -o /dev/null -w 'HTTP %{http_code}\\n' " + quoted_url
+ 
+     evidence = [
+         {"label": "URL", "value": url},
+@@ -235,7 +259,7 @@ def main() -> int:
+                 print(f"No matching finding found for selector: {args.id}", file=sys.stderr)
+                 return 1
+             # Default to the highest-ranked item if no selector is passed
+-            selected = max(findings, key=lambda x: int(x.get("score", 0)))
++            selected = max(findings, key=lambda x: safe_score(x.get("score", 0)))
+         report_text = render_report(build_context(selected, args.title_prefix), args.template)
+ 
+     output_path = args.output
+diff --git a/recon/triage.py b/recon/triage.py
+index 7dde85f..f8a6250 100644
+--- a/recon/triage.py
++++ b/recon/triage.py
+@@ -196,9 +196,22 @@ def extract_host(url: str) -> str:
+         return ""
+ 
+ 
++_KEYWORD_PATTERNS = {
++    kw: re.compile(r"(?<![A-Za-z0-9])" + re.escape(kw) + r"(?![A-Za-z0-9])", re.I)
++    for kw in HIGH_VALUE_KEYWORDS
++}
++
++
++def matched_keywords(lower_url: str) -> List[str]:
++    """Keywords from HIGH_VALUE_KEYWORDS that appear as whole path/word tokens
++    in the URL, not as substrings of unrelated words (e.g. "dev" must not
++    match inside "developer", "test" must not match inside "latest")."""
++    return [kw for kw, pattern in _KEYWORD_PATTERNS.items() if pattern.search(lower_url)]
++
++
+ def path_looks_sensitive(url: str) -> bool:
+     low = url.lower()
+-    return any(k in low for k in HIGH_VALUE_KEYWORDS) or any(low.endswith(ext) for ext in SENSITIVE_EXTENSIONS)
++    return bool(matched_keywords(low)) or any(low.endswith(ext) for ext in SENSITIVE_EXTENSIONS)
+ 
+ 
+ def score_finding(url: str, status: Optional[int], title: Optional[str], source: str) -> Tuple[int, List[str]]:
+@@ -233,11 +246,10 @@ def score_finding(url: str, status: Optional[int], title: Optional[str], source:
+         score += 50
+         tags.add("leaked-file")
+ 
+-    if any(k in lower for k in HIGH_VALUE_KEYWORDS):
++    kw_hits = matched_keywords(lower)
++    if kw_hits:
+         score += 20
+-        for k in HIGH_VALUE_KEYWORDS:
+-            if k in lower:
+-                tags.add(k)
++        tags.update(kw_hits)
+ 
+     # Titles and content hints
+     if title:
+@@ -288,11 +300,25 @@ def parse_httpx_live_line(line: str) -> Optional[Tuple[str, Optional[int], Optio
+             status = None
+ 
+     title = None
+-    # Usually title is after status and can include spaces, e.g. "200  ...  <title>"
+-    # We keep it only if there is a clean title tag format in the line.
++    # httpx's `-title` flag emits the title in square brackets, typically the
++    # bracket group after the status code, e.g.:
++    #   https://example.com [200] [Example Domain]
++    # Support both that format and raw <title>...</title> HTML, in case the
++    # input was produced some other way (e.g. piped through a different tool).
+     title_match = re.search(r"<title>(.*?)</title>", s, flags=re.I | re.S)
+     if title_match:
+         title = title_match.group(1).strip()
++    else:
++        bracket_groups = re.findall(r"\[([^\[\]]*)\]", s)
++        for group in bracket_groups:
++            g = group.strip()
++            # Skip bracket groups that are just the status code or a tech/
++            # content-type stack httpx also wraps in brackets (digits only,
++            # or things like "nginx","text/html" are not useful as titles).
++            if not g or g.isdigit():
++                continue
++            title = g
++            break
+     return url, status, title
+ 
+ 
+@@ -440,7 +466,7 @@ def init_db(db_path: Path):
+ 
+ 
+ def upsert_finding(conn: sqlite3.Connection, finding: Finding):
+-    now = __import__("datetime").datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
++    now = __import__("datetime").datetime.now(__import__("datetime").timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+     tags = ",".join(normalize_tags(finding.tags))
+     conn.execute(
+         """
+@@ -566,6 +592,17 @@ def write_jsonl(path: Path, findings: Sequence[Finding]):
+             fh.write(json.dumps(finding.to_dict(), ensure_ascii=False, sort_keys=True) + "\n")
+ 
+ 
++def csv_safe(value: str) -> str:
++    """Neutralize CSV/spreadsheet formula injection. Titles come from scraped
++    page content (attacker-influenced), so a value like '=HYPERLINK(...)' or
++    '@SUM(...)' can execute as a formula when the CSV is opened in Excel/
++    Sheets. Prefix such values with a single-quote escape, the standard
++    mitigation, so they're treated as text."""
++    if value and value[0] in ("=", "+", "-", "@", "\t", "\r"):
++        return "'" + value
++    return value
++
++
+ def write_csv(path: Path, findings: Sequence[Finding]):
+     fieldnames = ["fingerprint", "severity", "score", "status", "url", "source", "tags", "title"]
+     with path.open("w", encoding="utf-8", newline="") as fh:
+@@ -580,8 +617,8 @@ def write_csv(path: Path, findings: Sequence[Finding]):
+                     "status": f.status,
+                     "url": f.url,
+                     "source": f.source,
+-                    "tags": ", ".join(f.tags),
+-                    "title": f.title or "",
++                    "tags": csv_safe(", ".join(f.tags)),
++                    "title": csv_safe(f.title or ""),
+                 }
+             )
+ 
