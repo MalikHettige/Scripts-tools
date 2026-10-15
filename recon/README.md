@@ -1,4 +1,4 @@
-# /recon
+# Tools built for recon 
 
 Small, standalone recon tools used ahead of/alongside manual hunting. Not vulnerability-specific — this is infrastructure that feeds into the actual vuln-class work tracked elsewhere in this repo.
 
