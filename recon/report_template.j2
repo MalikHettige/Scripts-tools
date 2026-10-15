@@ -1,0 +1,51 @@
+# Report Draft
+
+# {{ title_prefix }} {{ title }}
+
+## Summary
+{{ summary }}
+
+## Affected host and URL
+- Host: {{ host }}
+- URL: {{ url }}
+- HTTP status: {{ status }}
+- Source: {{ source }}
+
+## Severity and impact
+- Severity: {{ severity }}
+- Risk score: {{ score }}
+- Impact: {{ impact }}
+
+## Evidence
+{% for item in evidence %}
+- {{ item.label }}: {{ item.value }}
+{% endfor %}
+
+## Reproduction / validation
+```bash
+{{ curl_cmd }}
+```
+
+## Notes on tags
+{% if tags %}
+- {{ tags | join(', ') }}
+{% else %}
+- No special tags were identified.
+{% endif %}
+
+## Remediation guidance
+{% for step in remediation %}
+- {{ step }}
+{% endfor %}
+
+## Reviewer notes
+- This draft was auto-generated from the recon triage output.
+- Review the evidence, validate the actual application behavior, and adjust the final wording before disclosure or escalation.
+- If the finding is not valid, mark it as a false positive and keep the related evidence for reference.
+
+{% if top_findings is defined %}
+## Top findings summary
+{% for item in top_findings %}
+- {{ item.severity|upper }} / score={{ item.score }} / status={{ item.status }} / {{ item.url }}
+{% endfor %}
+{% endif %}
