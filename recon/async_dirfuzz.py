@@ -20,6 +20,7 @@ from pathlib import Path
 
 import aiohttp
 from aiohttp import ClientTimeout
+from aiohttp.resolver import ThreadedResolver
 from asyncio import Semaphore
 
 HEADERS = {"User-Agent": "dirfuzz/2.0 (+you@example.com)"}
@@ -32,7 +33,7 @@ async def fetch(session, url):
         return resp.status, len(text), str(resp.url)
 
 
-async def calibrate(session, target):
+async def calibrate(session, target, scheme):
     """
     Probe a few deliberately-garbage paths to learn what a 'not found'
     response actually looks like on this target (status + length).
@@ -41,7 +42,7 @@ async def calibrate(session, target):
     junk_paths = ["asjdkqwoeiuzxcv123", "zzz9999notarealpath", "qpwoeiruty000000"]
     signatures = set()
     for junk in junk_paths:
-        url = f"https://{target}/{junk}"
+        url = f"{scheme}://{target}/{junk}"
         try:
             status, length, _ = await fetch(session, url)
             signatures.add((status, length))
@@ -55,7 +56,12 @@ async def probe(session, sem, url, baseline, results, out_fh):
         try:
             status, length, final_url = await fetch(session, url)
         except Exception as e:
-            print(f"ERR    ----   {url}  -> {e}")
+            # Some exceptions (notably asyncio.TimeoutError) stringify to an
+            # empty string, which looks like a silent/blank failure. Fall
+            # back to the exception's type name so there's always something
+            # readable here.
+            msg = str(e) or type(e).__name__
+            print(f"ERR    ----   {url}  -> {msg}")
             return
 
         if status in (404, 410):
@@ -83,9 +89,15 @@ async def main(args):
     results = []
     out_fh = open(args.output, "w") if args.output else None
 
-    async with aiohttp.ClientSession(timeout=timeout, headers=HEADERS) as session:
+    # Use the threaded resolver (plain system getaddrinfo) instead of aiohttp's
+    # default aiodns-based resolver. aiodns does raw UDP DNS queries directly,
+    # which can get silently blocked/filtered by VPN clients (observed with
+    # Proton VPN on Windows) even when normal system DNS (nslookup, browsers,
+    # curl) resolves fine. This avoids that failure mode entirely.
+    connector = aiohttp.TCPConnector(resolver=ThreadedResolver())
+    async with aiohttp.ClientSession(timeout=timeout, headers=HEADERS, connector=connector) as session:
         print("[*] Calibrating against soft-404 responses...")
-        baseline = await calibrate(session, args.target)
+        baseline = await calibrate(session, args.target, args.scheme)
         if baseline:
             print(f"[*] Learned {len(baseline)} soft-404 signature(s), will be filtered.")
 
@@ -94,7 +106,7 @@ async def main(args):
         for word in words:
             for ext in extensions:
                 path = f"{word}.{ext}" if ext else word
-                url = f"https://{args.target}/{path}"
+                url = f"{args.scheme}://{args.target}/{path}"
                 tasks.append(asyncio.create_task(probe(session, sem, url, baseline, results, out_fh)))
 
         await asyncio.gather(*tasks)
@@ -112,6 +124,9 @@ def parse_args():
     p.add_argument("-c", "--concurrency", type=int, default=20, help="Concurrent requests (default 20)")
     p.add_argument("-t", "--timeout", type=int, default=10, help="Per-request timeout in seconds (default 10)")
     p.add_argument("--ext", help="Comma-separated extensions to append per word, e.g. json,bak,old")
+    p.add_argument("--scheme", choices=["https", "http"], default="https",
+                    help="Scheme to use (default https). Use --scheme http for targets with no TLS on 443 "
+                         "(you'll see blank/TimeoutError ERR lines on every request if you get this wrong).")
     return p.parse_args()
 
 
