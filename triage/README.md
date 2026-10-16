@@ -52,6 +52,9 @@ python reportgen.py --input findings.jsonl --top 5 --output report.md
 
 Dependencies: `jinja2`
 
+**This is how it would be:**
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/acc46f94-819c-47d1-b32e-d2af589ec0ad" />
+
 ## Notes
 
 - Both scripts were verified end-to-end against synthetic recon output before being documented here — `triage.py` correctly parses/scores/dedupes mixed `live`/`crawled`/`fuzz` input, and `reportgen.py` correctly renders both single-finding and `--top` summary reports from its output.
