@@ -3,6 +3,7 @@
 ## Highlights
 - [Broken brute-force protection — multiple credentials per request](https://github.com/MalikHettige/Scripts-tools/blob/main/authentication/Broken%20brute-force%20protection%2C%20multiple%20credentials%20per%20request/README.md)
 - [JWT algorithm confusion — no exposed key](https://github.com/MalikHettige/Scripts-tools/blob/main/JWT/JWT%20authentication%20bypass%20via%20algorithm%20confusion%20with%20no%20exposed%20key/README.md)
+- [Program monitor](https://github.com/MalikHettige/Scripts-tools/tree/main/python/new-program-monitor)
   
 Scripts and tooling for bug bounty hunting — organized by vulnerability class, built while solving PortSwigger labs and adapted for real-world (RW) use. Each subfolder targets a specific technique, with a README explaining the mechanism, dependencies, and generic usage. 
 
