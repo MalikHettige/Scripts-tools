@@ -1,0 +1,48 @@
+# {{ title_prefix }} {{ title }}
+
+**Host:** {{ host }}
+**Severity:** {{ severity }}
+**Risk score:** {{ score }}
+**HTTP status:** {{ status }}
+**Source:** {{ source }}
+**Tags:** {{ tags | join(', ') if tags else 'none' }}
+
+## Summary
+
+{{ summary }}
+
+## Impact
+
+{{ impact }}
+
+{% if top_findings is defined -%}
+## Top Findings
+
+| Severity | Score | Status | URL | Tags |
+|---|---|---|---|---|
+{% for f in top_findings -%}
+| {{ f.severity }} | {{ f.score }} | {{ f.status }} | {{ f.url }} | {{ f.tags | join(', ') if f.tags else '' }} |
+{% endfor %}
+{%- else %}
+## Evidence
+
+| Field | Value |
+|---|---|
+{% for e in evidence -%}
+| {{ e.label }} | {{ e.value }} |
+{% endfor %}
+### Verification
+
+```bash
+{{ curl_cmd }}
+```
+
+## Remediation
+
+{% for step in remediation -%}
+- {{ step }}
+{% endfor %}
+{%- endif %}
+
+---
+*This report draft was generated automatically from recon triage output — review, correct, and fill in any missing context before submitting.*
