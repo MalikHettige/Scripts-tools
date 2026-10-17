@@ -32,6 +32,8 @@ python3 subagg.py example.com
 
 Delete `subagg.py` afterward if you don't need it again.
 
+<img width="1335" height="405" alt="image" src="https://github.com/user-attachments/assets/f4c21b19-88d9-4adb-863a-1e1ae7686ac1" />
+
 #### Frequent use (clone and keep)
 
 ```bash
