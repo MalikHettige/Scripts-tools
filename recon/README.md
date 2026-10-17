@@ -48,37 +48,43 @@ python3 ~/GitHub/Scripts-tools/recon/subagg.py example.com
 
 Dependencies: none required (standard library only); `requests` optional for nicer error handling.
 
-### `async_dirfuzz.py`
-Async directory/file content discovery against a target host.
-
+### `monitor.py`
+Continuous delta watcher / asset monitor. Takes a domain list (e.g. `subagg.py`'s `domains.jsonl`) and compares it against history stored in SQLite, reporting what's genuinely new or dropped since the last run for that target — built to be run repeatedly (cron, GitHub Actions) against the same target over time.
+ 
 ```bash
-python async_dirfuzz.py target.com wordlist.txt
-python async_dirfuzz.py target.com wordlist.txt --ext json,bak,old,swp -o results.txt -c 30 -t 8
+python monitor.py --input domains.jsonl --target example.com
+python monitor.py --input domains.jsonl --target example.com --db history.db
+python monitor.py --input domains.jsonl --target example.com --slack-webhook "$SLACK_WEBHOOK_URL"
+python monitor.py --input domains.jsonl --target example.com --github-repo MalikHettige/scripts-tools --github-token "$GITHUB_TOKEN"
 ```
-
-- Auto-calibrates against soft-404 responses before the real sweep (apps that return `200 OK` with a custom "not found" page instead of a real 404) so those don't flood results as false positives.
-- `--ext` appends extensions per wordlist entry — useful for sweeping leaked config/spec files (`openapi.json`, `.bak`, `.old`) alongside plain paths.
-- `-o` writes matches to a file in addition to stdout; without it, results only print live. Feed this file straight into `triage.py --fuzz`.
-- Redirects (301/302/307/308) are flagged distinctly from real 200-class hits rather than lumped together.
-- Tested locally against a mock server simulating a soft-404 trap — confirmed the calibration step correctly filters noise that a naive status-only check would report as 100% false positives. See `/writeups` methodology notes for the before/after.
-
-Dependencies: `aiohttp`
-
-### `enrich_example.py`
-Domain OSINT/enrichment via VirusTotal's public API.
-
+ 
+- First run against a target is treated as a baseline (seeds history, nothing alert-worthy yet) — every run after that reports real deltas.
+- Diffing is against the *previous run's* snapshot, not the all-time ledger — a domain that drops once is reported once, not re-flagged on every subsequent run forever (a real bug caught and fixed during testing: an earlier version diffed against the full historical "ever seen" set, which meant anything that ever disappeared stayed permanently flagged as "dropped").
+- A separate historical ledger (`seen_domains`, with `first_seen`/`last_seen`) is still kept alongside the snapshot, so you can see when something was first spotted even though diffing doesn't use it.
+- Accepts either `domains.jsonl` (subagg.py's shape) or a plain `domains.txt` as input.
+- `--slack-webhook` (or `SLACK_WEBHOOK_URL` env var) posts a plain-text alert on any delta; `--github-repo` + `--github-token` (or `GITHUB_TOKEN` env var) opens a GitHub issue instead/as well. Both are optional and skip silently with a warning if not configured.
+- `--quiet` suppresses the printed summary without affecting alerts.
+- History (`--db`, default `monitor.db`) is scoped per `--target`, so multiple targets can share one DB file without cross-contaminating each other's baselines.
+- Verified end-to-end: baseline run, delta run (new + dropped), no-change run, and a dropped-domain-reappears run — including the regression case for the snapshot-vs-ledger bug above — plus error paths (missing input file, unparseable input).
+#### Just want one result? (no repo, no setup)
+ 
 ```bash
-VT_API_KEY=xxx python enrich_example.py domain.com
+curl -o monitor.py "https://raw.githubusercontent.com/MalikHettige/scripts-tools/main/recon/monitor.py"
+python3 monitor.py --input domains.jsonl --target example.com
 ```
-
-- Requires `VT_API_KEY` set as an environment variable — the script exits cleanly with a clear message if it's missing, rather than silently firing a request with an invalid key.
-- Saves both the raw API response and a normalized summary (analysis stats, whois) to `enrich_output/<domain>.json`.
-- Adjacent tooling, not core to the BAC/API/IDOR/auth/business-logic/race-condition hunting lane this repo is otherwise built around — used situationally during initial target recon, not a standing part of the usual flow.
-
-Dependencies: `requests`
-
-## Notes
-
-- These are intentionally minimal, single-purpose scripts, not a framework — extend in place rather than refactoring into a shared module unless a third script actually needs to share logic with one of these.
-- More scripts will likely land here over time (subdomain enumeration, JS endpoint extraction, parameter discovery, etc.) as the recon workflow in the main methodology grows past what manual Burp work covers efficiently. Each new addition should stay standalone and get its own section in this README, same format as above — command, what it filters/flags, dependencies, and a one-line scope note on where it fits (or doesn't) relative to the core vuln-class focus.
-- Triage and report-drafting tooling (`triage.py`, `reportgen.py`) used to live here but has moved to [`triage/`](../triage/README.md) — this folder is for *discovery*, not what happens to the output afterward.
+ 
+Delete `monitor.py` (and `monitor.db`, if you don't want to keep the history) afterward if you don't need it again.
+ 
+#### Frequent use (clone and keep)
+ 
+```bash
+git clone https://github.com/MalikHettige/scripts-tools.git "$HOME/GitHub/Scripts-tools"
+```
+ 
+Then, from anywhere:
+ 
+```bash
+python3 ~/GitHub/Scripts-tools/recon/monitor.py --input domains.jsonl --target example.com
+```
+ 
+Dependencies: none required (standard library only — `sqlite3`, `json`, `urllib`); `requests` optional for nicer error handling on the Slack/GitHub alert calls.
