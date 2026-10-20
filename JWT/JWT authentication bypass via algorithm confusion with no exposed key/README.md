@@ -60,5 +60,4 @@ git clone https://github.com/ticarpi/jwt_tool
 git clone https://github.com/silentsignal/rsa_sign2n
 ```
 
-## Related writeup
-https://github.com/MalikHettige/Bug-bounty-writeups/blob/main/[path-to-writeup].md
+## [Related writeup](https://github.com/MalikHettige/Bug-bounty-writeups/blob/main/JWT/labs/lab%20-%20JWT%20authentication%20bypass%20via%20algorithm%20confusion.md)
