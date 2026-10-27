@@ -14,6 +14,7 @@ Scripts are organized by vulnerability category, e.g.:
 
 - `JWT/` — JWT forgery and bypass techniques (weak secret cracking, alg:none, kid path traversal, jwk header injection, algorithm confusion with and without exposed keys)
 - `authorization/` — access control testing tools, including the IDOR matrix tester in `authorization/idor-matrix/`
+- `oauth/` — OAuth 2.0 / OpenID Connect recon and testing helpers, including the blog-author finder in `oauth/blog-author-finder/`
 
 
 ## Philosophy
