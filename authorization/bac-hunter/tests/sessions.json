@@ -1,0 +1,6 @@
+{
+  "sessions": [
+    {"name": "bob_low_priv", "level": 0, "cookie": "bob-cookie", "object_ids": ["1002"]},
+    {"name": "alice_admin", "level": 1, "cookie": "alice-cookie", "object_ids": ["1001"]}
+  ]
+}

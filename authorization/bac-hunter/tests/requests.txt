@@ -1,0 +1,4 @@
+GET http://127.0.0.1:8765/api/orders/1001  Cookie: alice-cookie
+GET http://127.0.0.1:8765/api/invoices/5002  Cookie: bob-cookie
+GET http://127.0.0.1:8765/api/profile?user_id=1  Cookie: bob-cookie
+GET http://127.0.0.1:8765/api/admin/stats  Cookie: bob-cookie
