@@ -42,6 +42,15 @@ These can't be known in advance — test them manually first:
 pip install requests --break-system-packages   # if not already installed
 python overflow_exploit.py
 ```
+- Create a nano file and paste the script
+```bash
+nano overflow.py
+#paste the script
+```
+- **Ctrl + O**
+- **Hit enter**
+- **Ctrl + X**
+- Then run `python overflow.py`
 
 The script prints its calculated overflow target and batch estimate, then gives you 5 seconds to Ctrl+C if the numbers look wrong before it starts firing requests.
 
