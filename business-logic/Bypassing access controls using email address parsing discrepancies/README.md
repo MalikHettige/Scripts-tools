@@ -22,7 +22,7 @@ Every payload is printed both raw (readable) and **already percent-encoded for a
 
 ```bash
 curl -o email_parser_bypass.py "https://raw.githubusercontent.com/MalikHettige/scripts-tools/main/business-logic/Bypassing%20access%20controls%20using%20email%20address%20parsing%20discrepancies/email_parser_bypass.py"
-python3 email_parser_bypass.py --attacker-domain <your-exploit-server-or-collaborator-domain> --target-domain <privileged-domain> --probe
+python3 email_parser_bypass.py --attacker-domain <your-exploit-server-or-webhook-domain> --target-domain <privileged-domain> --probe
 ```
 
 Delete `email_parser_bypass.py` afterward if you don't need it again.
@@ -37,7 +37,7 @@ Then, from anywhere:
 
 ```bash
 python3 "$HOME/Documents/GitHub/Scripts-tools/business-logic/Bypassing access controls using email address parsing discrepancies/email_parser_bypass.py" \
-  --attacker-domain <your-exploit-server-or-collaborator-domain> \
+  --attacker-domain <your-exploit-server-or-webhook-domain> \
   --target-domain <privileged-domain> \
   --probe
 ```
@@ -46,9 +46,9 @@ python3 "$HOME/Documents/GitHub/Scripts-tools/business-logic/Bypassing access co
 
 1. Confirm the domain restriction exists (try a normal non-matching email, note the exact rejection message).
 2. Run this script with `--probe` to get the Q-encoding recon payloads. Submit each one (form-encoded!) via the registration form, noting whether the error message is generic ("invalid email") or encoding-specific ("blocked for security reasons" or similar). A distinct, different error message on the Q-encoded attempt is the signal that the app detects *some* encodings as suspicious — meaning there's likely a gap in which encodings it checks.
-3. Run the script without `--probe` (or just use the "Exploit payload" section of the same output) to get your UTF-7 payload, built from your real attacker-controlled domain (your exploit server, or a Burp Collaborator domain) and the target's privileged domain.
+3. Run the script without `--probe` (or just use the "Exploit payload" section of the same output) to get your UTF-7 payload, built from your real attacker-controlled domain (your exploit server, or a webhook.site-style domain — Collaborator is Burp Pro only, not needed here) and the target's privileged domain.
 4. Submit the **form-encoded** version as the email parameter's raw value in Burp Repeater (Raw tab, not Pretty — Pretty view can re-render/re-encode as you type).
-5. If accepted, check your attacker-controlled inbox (exploit server email client, or Collaborator poll) for the confirmation email, and complete registration via that link.
+5. If accepted, check your attacker-controlled inbox (exploit server email client, or your webhook dashboard) for the confirmation email, and complete registration via that link.
 6. Confirm the account received the expected elevated access (admin panel, staff-only area, etc.).
 
 **It would look like:**

@@ -94,7 +94,7 @@ def build_exploit_payload(attacker_local: str, attacker_domain: str, target_doma
 def main():
     parser = argparse.ArgumentParser(description="Build email-parsing-discrepancy bypass payloads.")
     parser.add_argument("--attacker-local", default="attacker", help="Local part of the address you actually control (default: attacker)")
-    parser.add_argument("--attacker-domain", required=True, help="Domain/subdomain you actually receive mail at (e.g. your exploit server or Burp Collaborator domain)")
+    parser.add_argument("--attacker-domain", required=True, help="Domain/subdomain you actually receive mail at (e.g. your exploit server, or a webhook-based catch-all domain — no Burp Pro/Collaborator required)")
     parser.add_argument("--target-domain", required=True, help="The privileged/allowed domain the app's validator checks for (e.g. ginandjuice.shop)")
     parser.add_argument("--probe", action="store_true", help="Also print the cheap Q-encoding recon probes")
     args = parser.parse_args()
