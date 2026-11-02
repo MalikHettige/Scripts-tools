@@ -1,0 +1,6 @@
+{"domain": "dev.example.com", "sources": ["crtsh"]}
+{"domain": "example.com", "sources": ["crtsh"]}
+{"domain": "m.example.com", "sources": ["crtsh"]}
+{"domain": "products.example.com", "sources": ["crtsh"]}
+{"domain": "support.example.com", "sources": ["crtsh"]}
+{"domain": "www.example.com", "sources": ["crtsh"]}
