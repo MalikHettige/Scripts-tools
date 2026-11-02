@@ -4,6 +4,32 @@ Builds ready-to-paste payloads for apps that grant access/privileges based on an
 
 **Trigger condition:** any domain-restricted signup/email-change flow — look for copy like "if you work for X, use your @company.com email," SSO/enterprise tiers, auto-join-by-domain onboarding.
 
+## Quick start (copy-paste, no reading)
+
+```bash
+# 1. Go to the script's folder
+cd github/scripts-tools/business-logic/"Bypassing access controls using email address parsing discrepancies"
+
+# 2. Run it (swap in your real exploit-server domain and the target's domain)
+python3 email_parser_bypass.py \
+  --attacker-local attacker \
+  --attacker-domain [your exploit server or webhook domain, e.g. exploit-XXXX.exploit-server.net] \
+  --target-domain [the privileged domain the app requires] \
+  --probe
+```
+
+**What to do with each line of output:**
+
+| Output line | What to do with it |
+|---|---|
+| `[iso-8859-1] Form-encoded: ...` | Paste as the `email` value in Repeater (Raw tab) → send → read the **response** for a block/error message |
+| `[utf-8] Form-encoded: ...` | Same — paste, send, read the response |
+| `Exploit payload → Form-encoded: ...` | **This is the real payload.** Paste as the `email` value in the real registration request → send → check your exploit-server inbox for the confirmation email |
+
+**Never paste the "Raw" line into a request body** — only paste the line under "Form-encoded". The Raw line is just there so you can read what the payload actually is.
+
+**Where to look for the result each time:** the Repeater **Response panel**, same tab, right after you click Send. Not a separate step, not something to look up elsewhere — it's printed in the exact same request/response pair you just sent.
+
 ## What this is for
 
 Two phases:
