@@ -2,6 +2,7 @@
 
 ## Highlights
 - [Broken brute-force protection — multiple credentials per request](https://github.com/MalikHettige/Scripts-tools/blob/main/authentication/Broken%20brute-force%20protection%2C%20multiple%20credentials%20per%20request/README.md)
+- [Race condition single-packet attack — lockout bypass](https://github.com/MalikHettige/Scripts-tools/blob/main/race-conditions/Bypassing%20rate%20limits%20via%20race%20conditions/README.md)
 - [JWT algorithm confusion — no exposed key](https://github.com/MalikHettige/Scripts-tools/blob/main/JWT/JWT%20authentication%20bypass%20via%20algorithm%20confusion%20with%20no%20exposed%20key/README.md)
 - [Program monitor](https://github.com/MalikHettige/Scripts-tools/tree/main/python/new-program-monitor)
 - [Passive subdomain aggregator](https://github.com/MalikHettige/Scripts-tools/blob/main/recon/subagg.py)
@@ -13,6 +14,7 @@ Scripts and tooling for bug bounty hunting — organized by vulnerability class,
 Scripts are organized by vulnerability category, e.g.:
 
 - `JWT/` — JWT forgery and bypass techniques (weak secret cracking, alg:none, kid path traversal, jwk header injection, algorithm confusion with and without exposed keys)
+- `race-conditions/` — TOCTOU / single-packet attack tooling (Turbo Intruder scripts for racing check-then-act endpoints: lockouts, limits, coupon/redemption flows)
 - `authorization/` — access control testing tools, including the IDOR matrix tester in `authorization/idor-matrix/`
 - `oauth/` — OAuth 2.0 / OpenID Connect recon and testing helpers, including the blog-author finder in `oauth/blog-author-finder/`
 
